@@ -116,11 +116,7 @@ public class ProductTypeResourceIntTest {
             .blockType(DEFAULT_BLOCK_TYPE)
             .imageUrl(DEFAULT_IMAGE_URL)
             .mobileImageUrl(DEFAULT_MOBILE_IMAGE_URL)
-            .delFlag(DEFAULT_DEL_FLAG)
-            .createdBy(DEFAULT_CREATED_BY)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
+            .delFlag(DEFAULT_DEL_FLAG);
         return productType;
     }
 
@@ -246,11 +242,7 @@ public class ProductTypeResourceIntTest {
             .blockType(UPDATED_BLOCK_TYPE)
             .imageUrl(UPDATED_IMAGE_URL)
             .mobileImageUrl(UPDATED_MOBILE_IMAGE_URL)
-            .delFlag(UPDATED_DEL_FLAG)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .delFlag(UPDATED_DEL_FLAG);
 
         restProductTypeMockMvc.perform(put("/api/product-types")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

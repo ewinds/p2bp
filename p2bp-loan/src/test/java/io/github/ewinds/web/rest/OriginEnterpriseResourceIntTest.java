@@ -147,11 +147,7 @@ public class OriginEnterpriseResourceIntTest {
             .legalCardChecked(DEFAULT_LEGAL_CARD_CHECKED)
             .bondingChecked(DEFAULT_BONDING_CHECKED)
             .platformChecked(DEFAULT_PLATFORM_CHECKED)
-            .addressChecked(DEFAULT_ADDRESS_CHECKED)
-            .createdBy(DEFAULT_CREATED_BY)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
+            .addressChecked(DEFAULT_ADDRESS_CHECKED);
         return originEnterprise;
     }
 
@@ -309,11 +305,7 @@ public class OriginEnterpriseResourceIntTest {
             .legalCardChecked(UPDATED_LEGAL_CARD_CHECKED)
             .bondingChecked(UPDATED_BONDING_CHECKED)
             .platformChecked(UPDATED_PLATFORM_CHECKED)
-            .addressChecked(UPDATED_ADDRESS_CHECKED)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .addressChecked(UPDATED_ADDRESS_CHECKED);
 
         restOriginEnterpriseMockMvc.perform(put("/api/origin-enterprises")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

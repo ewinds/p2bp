@@ -172,11 +172,7 @@ public class ProductResourceIntTest {
             .confine(DEFAULT_CONFINE)
             .auditInfo(DEFAULT_AUDIT_INFO)
             .auditInfoId(DEFAULT_AUDIT_INFO_ID)
-            .autoFinancePublishValidTime(DEFAULT_AUTO_FINANCE_PUBLISH_VALID_TIME)
-            .createdBy(DEFAULT_CREATED_BY)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
+            .autoFinancePublishValidTime(DEFAULT_AUTO_FINANCE_PUBLISH_VALID_TIME);
         return product;
     }
 
@@ -358,11 +354,7 @@ public class ProductResourceIntTest {
             .confine(UPDATED_CONFINE)
             .auditInfo(UPDATED_AUDIT_INFO)
             .auditInfoId(UPDATED_AUDIT_INFO_ID)
-            .autoFinancePublishValidTime(UPDATED_AUTO_FINANCE_PUBLISH_VALID_TIME)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .autoFinancePublishValidTime(UPDATED_AUTO_FINANCE_PUBLISH_VALID_TIME);
 
         restProductMockMvc.perform(put("/api/products")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

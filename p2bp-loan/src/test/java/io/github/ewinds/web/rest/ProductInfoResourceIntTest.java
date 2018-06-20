@@ -344,11 +344,7 @@ public class ProductInfoResourceIntTest {
             .guaranteeCheckFlg(DEFAULT_GUARANTEE_CHECK_FLG)
             .purpose(DEFAULT_PURPOSE)
             .estateCheckFlg(DEFAULT_ESTATE_CHECK_FLG)
-            .guaranteeId(DEFAULT_GUARANTEE_ID)
-            .createdBy(DEFAULT_CREATED_BY)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
+            .guaranteeId(DEFAULT_GUARANTEE_ID);
         return productInfo;
     }
 
@@ -702,11 +698,7 @@ public class ProductInfoResourceIntTest {
             .guaranteeCheckFlg(UPDATED_GUARANTEE_CHECK_FLG)
             .purpose(UPDATED_PURPOSE)
             .estateCheckFlg(UPDATED_ESTATE_CHECK_FLG)
-            .guaranteeId(UPDATED_GUARANTEE_ID)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .guaranteeId(UPDATED_GUARANTEE_ID);
 
         restProductInfoMockMvc.perform(put("/api/product-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

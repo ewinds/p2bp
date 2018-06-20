@@ -119,11 +119,7 @@ public class OriginIndividualResourceIntTest {
             .mobile(DEFAULT_MOBILE)
             .gender(DEFAULT_GENDER)
             .age(DEFAULT_AGE)
-            .purpose(DEFAULT_PURPOSE)
-            .createdBy(DEFAULT_CREATED_BY)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
+            .purpose(DEFAULT_PURPOSE);
         return originIndividual;
     }
 
@@ -253,11 +249,7 @@ public class OriginIndividualResourceIntTest {
             .mobile(UPDATED_MOBILE)
             .gender(UPDATED_GENDER)
             .age(UPDATED_AGE)
-            .purpose(UPDATED_PURPOSE)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .purpose(UPDATED_PURPOSE);
 
         restOriginIndividualMockMvc.perform(put("/api/origin-individuals")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

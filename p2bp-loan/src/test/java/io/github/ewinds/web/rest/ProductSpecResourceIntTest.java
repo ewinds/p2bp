@@ -189,11 +189,7 @@ public class ProductSpecResourceIntTest {
             .pubDate(DEFAULT_PUB_DATE)
             .dayRateCalculation(DEFAULT_DAY_RATE_CALCULATION)
             .prodFlg(DEFAULT_PROD_FLG)
-            .extendAttribute(DEFAULT_EXTEND_ATTRIBUTE)
-            .createdBy(DEFAULT_CREATED_BY)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
+            .extendAttribute(DEFAULT_EXTEND_ATTRIBUTE);
         return productSpec;
     }
 
@@ -391,11 +387,7 @@ public class ProductSpecResourceIntTest {
             .pubDate(UPDATED_PUB_DATE)
             .dayRateCalculation(UPDATED_DAY_RATE_CALCULATION)
             .prodFlg(UPDATED_PROD_FLG)
-            .extendAttribute(UPDATED_EXTEND_ATTRIBUTE)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .extendAttribute(UPDATED_EXTEND_ATTRIBUTE);
 
         restProductSpecMockMvc.perform(put("/api/product-specs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
