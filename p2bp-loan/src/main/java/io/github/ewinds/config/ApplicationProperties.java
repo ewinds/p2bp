@@ -18,6 +18,10 @@ public class ApplicationProperties {
 
     private final List<KeyValue> interestCalculations = new ArrayList<>();
 
+    private final List<KeyValue> paymentMethodsByMonth = new ArrayList<>();
+
+    private final List<KeyValue> paymentMethodsByDay = new ArrayList<>();
+
     public static class KeyValue {
         public String key;
         public String value;
@@ -45,5 +49,13 @@ public class ApplicationProperties {
 
     public List<KeyValue> getInterestCalculations() {
         return interestCalculations;
+    }
+
+    public List<KeyValue> getPaymentMethodsByMonth() {
+        return paymentMethodsByMonth;
+    }
+
+    public List<KeyValue> getPaymentMethodsByDay() {
+        return paymentMethodsByDay;
     }
 }
