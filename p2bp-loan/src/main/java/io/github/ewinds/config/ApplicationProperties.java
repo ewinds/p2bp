@@ -16,6 +16,8 @@ public class ApplicationProperties {
 
     private final List<KeyValue> serviceFees = new ArrayList<>();
 
+    private final List<KeyValue> interestCalculations = new ArrayList<>();
+
     public static class KeyValue {
         public String key;
         public String value;
@@ -39,5 +41,9 @@ public class ApplicationProperties {
 
     public List<KeyValue> getServiceFees() {
         return serviceFees;
+    }
+
+    public List<KeyValue> getInterestCalculations() {
+        return interestCalculations;
     }
 }

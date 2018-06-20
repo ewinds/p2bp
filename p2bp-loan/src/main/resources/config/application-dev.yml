@@ -179,12 +179,25 @@ oauth2:
 
 application:
     service-fees:
-        - key: none
+        - key: NONE
           value: 无
-        - key: amount
+        - key: AMOUNT
           value: 金额
-        - key: rate
+        - key: RATIO
           value: 比率
-        - key: annualRate
+        - key: ANNUAL_RATE
           value: 年化收益率
-
+    interest-calculations:
+        - key: MANUAL
+          value: 募集后审核计息
+        - key: AUTO
+          value: 募满自动计息
+        - key: RATIO
+          value: 按募集比率计息
+    payment-methods:
+        - key: MANUAL
+          value: 募集后审核计息
+        - key: MANUAL
+          value: 募集后审核计息
+        - key: MANUAL
+          value: 募集后审核计息
