@@ -1,0 +1,230 @@
+entity Product {
+    contractNo String,
+    contractId String,
+    productsType String,
+    title String,
+    shortName String,
+    hits Integer,
+    state ProductState,
+    litpicFileId String,
+    cancelTime Instant,
+    cancelRemark String,
+    commentStatus String,
+    assignment Integer,
+    assignmentId Integer,
+    originInfo Integer,
+    frozenRequestNo String,
+    productsGroupId Integer,
+    confine String,
+    auditInfo Integer,
+    auditInfoId Integer,
+    autoFinancePublishValidTime Integer,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity ProductInfo {
+    amount BigDecimal,
+    interestRate BigDecimal,
+    validDay Integer,
+    publishDate Instant,
+    startDate Instant,
+    endDate Instant,
+    successDate Instant,
+    startInterestDate Instant,
+    repayType String,
+    interestRateType String,
+    period Integer,
+    repayTimes Integer,
+    manageFee BigDecimal,
+    manageFeeScale BigDecimal,
+    partFlg String,
+    fullFlg String,
+    failedFlg String,
+    amountYes BigDecimal,
+    amountWait BigDecimal,
+    amountScale BigDecimal,
+    minTenderAmount BigDecimal,
+    maxTenderAmount BigDecimal,
+    tenderAwardFlg String,
+    tenderFailureAwardFlg String,
+    tenderAwardAmount BigDecimal,
+    tenderAwardScale BigDecimal,
+    directionalPwd String,
+    secondFlg String,
+    dueinAmount BigDecimal,
+    investTotalAmount BigDecimal,
+    wanderFlg String,
+    tenderAutoPaymentFlg String,
+    partAmount BigDecimal,
+    maxPart Integer,
+    tenderMaxTimes Integer,
+    prepaymentFlg String,
+    prepaymentInterestMinDays Integer,
+    prepaymentMinAmount BigDecimal,
+    prepaymentMaxTimes Integer,
+    guaranteeType String,
+    guaranteeOthers String,
+    serviceFeeType String,
+    serviceFee BigDecimal,
+    parkingFee BigDecimal,
+    updDate Instant,
+    rateCalculationType String,
+    fullDate Instant,
+    noviceFlg String,
+    rateType String,
+    rateInputValue BigDecimal,
+    lastReplayDate Instant,
+    transferCanFlg String,
+    transferFrozeTime Integer,
+    minIncreasingAmount BigDecimal,
+    ver String,
+    idCardCheckFlg String,
+    marriageCheckFlg String,
+    householdCheckFlg String,
+    credibilityCheckFlg String,
+    guaranteeCheckFlg String,
+    purpose String maxlength(1024),
+    estateCheckFlg String,
+    guaranteeId String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity ProductSpec {
+    category ProductCategory,
+    name String,
+    startInterestType String,
+    startInterestTime String,
+    repayTimeType String,
+    principalAssignAccounts String,
+    principalSpecialAccountsId String,
+    interestAssignAccounts String,
+    interestSpecialAccountsId String,
+    bail String,
+    bailAmount BigDecimal,
+    productJoinCost String,
+    joinCost BigDecimal,
+    productExitCost String,
+    exitCost BigDecimal,
+    fileContractId String,
+    imgViewId String,
+    struts String,
+    productsDescription String maxlength(1024),
+    delFlag Boolean,
+    pubDate Instant,
+    dayRateCalculation String,
+    prodFlg String,
+    extendAttribute String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity ProductType {
+    name String,
+    desc String,
+    blockType BlockType,
+    imageUrl String,
+    imageUrl String,
+    mobileImageUrl String,
+    delFlag Boolean,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity Activity {
+    activityName String,
+    beginTime Instant,
+    endTime Instant,
+    activityType Integer,
+    cashId Integer,
+    activityRate BigDecimal,
+    extraRate BigDecimal,
+    activityTab String,
+    activityDesc String maxlength(1024),
+    delFlag Boolean,
+    imageUrl String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+relationship OneToOne {
+	ProductInfo{product} to Product
+}
+
+relationship ManyToOne {
+    ProductInfo{spec} to ProductSpec
+}
+
+relationship ManyToOne {
+    Product{activity} to Activity
+}
+
+relationship ManyToOne {
+    Product{type} to ProductType
+}
+
+enum ProductState {
+    PENDING, CHECKED, APPROVED, COMPLETED, REFUSED, CANCELED
+}
+
+enum ProductCategory {
+    FINANCING, DEBT
+}
+
+enum BlockType {
+    DEFAULT, NOVICE, APP, ACTIVITY
+}
+
+entity OriginEnterprise {
+    CompanyName String,
+    AbbrCompanyName String,
+    RegisteredCapital String,
+    LegalPerson String,
+    BusinessNum String,
+    industry String,
+    earning String,
+    SimpleDesc String,
+    CompanyIntroduce String maxlength(2048),
+    BusinessChecked Boolean,
+    LegalCardChecked Boolean,
+    BondingChecked Boolean,
+    PlatformChecked Boolean,
+    AddressChecked Boolean,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity OriginIndividual {
+    RealName String,
+    AbbrName String,
+    IdCard String,
+    Mobile String,
+    Gender Integer,
+    Age Integer,
+    Purpose String maxlength(2048),
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+relationship OneToOne {
+    Product{originEnterprise} to OriginEnterprise
+}
+
+relationship OneToOne {
+    Product{originIndividual} to OriginIndividual
+}

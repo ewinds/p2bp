@@ -1,0 +1,77 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "activityName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "beginTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "endTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "activityType",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "cashId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "activityRate",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "extraRate",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "activityTab",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "activityDesc",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1024
+        },
+        {
+            "fieldName": "delFlag",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "imageUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180620035901",
+    "entityTableName": "activity",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "loan"
+}

@@ -1,0 +1,139 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "originEnterprise",
+            "otherEntityName": "originEnterprise",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "product"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "originIndividual",
+            "otherEntityName": "originIndividual",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "product"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "activity",
+            "otherEntityName": "activity",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "type",
+            "otherEntityName": "productType",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "contractNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contractId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productsType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "shortName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hits",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "ProductState",
+            "fieldValues": "PENDING,CHECKED,APPROVED,COMPLETED,REFUSED,CANCELED"
+        },
+        {
+            "fieldName": "litpicFileId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cancelTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "cancelRemark",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "commentStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "assignment",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "assignmentId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "originInfo",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "frozenRequestNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productsGroupId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "confine",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "auditInfo",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "auditInfoId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "autoFinancePublishValidTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180620035857",
+    "entityTableName": "product",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "loan"
+}

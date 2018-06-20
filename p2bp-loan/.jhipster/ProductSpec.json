@@ -1,0 +1,130 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "category",
+            "fieldType": "ProductCategory",
+            "fieldValues": "FINANCING,DEBT"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "startInterestType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "startInterestTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "repayTimeType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "principalAssignAccounts",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "principalSpecialAccountsId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "interestAssignAccounts",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "interestSpecialAccountsId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bailAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "productJoinCost",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "joinCost",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "productExitCost",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "exitCost",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "fileContractId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imgViewId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "struts",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productsDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1024
+        },
+        {
+            "fieldName": "delFlag",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "pubDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "dayRateCalculation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prodFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "extendAttribute",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180620035859",
+    "entityTableName": "product_spec",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "loan"
+}

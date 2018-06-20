@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Product.
+    -->
+    <changeSet id="20180620035857-1" author="jhipster">
+        <createTable tableName="product">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="contract_no" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="contract_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="products_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="title" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="short_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="hits" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="state" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="litpic_file_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cancel_time" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cancel_remark" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="comment_status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="assignment" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="assignment_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="origin_info" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="frozen_request_no" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="products_group_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="confine" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="audit_info" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="audit_info_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="auto_finance_publish_valid_time" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_modified_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_modified_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+            <column name="origin_enterprise_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>            <column name="origin_individual_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
+            <column name="activity_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="product" columnName="cancel_time" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="created_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="last_modified_date" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

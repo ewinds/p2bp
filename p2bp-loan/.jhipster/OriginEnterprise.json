@@ -1,0 +1,89 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "companyName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "abbrCompanyName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "registeredCapital",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legalPerson",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "businessNum",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "industry",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "earning",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "simpleDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "companyIntroduce",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2048
+        },
+        {
+            "fieldName": "businessChecked",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "legalCardChecked",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "bondingChecked",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "platformChecked",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "addressChecked",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180620035902",
+    "entityTableName": "origin_enterprise",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "loan"
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity OriginEnterprise.
+    -->
+    <changeSet id="20180620035902-1" author="jhipster">
+        <createTable tableName="origin_enterprise">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="company_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="abbr_company_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="registered_capital" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="legal_person" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="business_num" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="industry" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="earning" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="simple_desc" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="company_introduce" type="varchar(2048)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="business_checked" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="legal_card_checked" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bonding_checked" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="platform_checked" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="address_checked" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_modified_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_modified_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="origin_enterprise" columnName="created_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="origin_enterprise" columnName="last_modified_date" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

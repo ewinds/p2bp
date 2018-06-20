@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity ProductSpec.
+    -->
+    <changeSet id="20180620035859-1" author="jhipster">
+        <createTable tableName="product_spec">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="category" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="start_interest_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="start_interest_time" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="repay_time_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="principal_assign_accounts" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="principal_special_accounts_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="interest_assign_accounts" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="interest_special_accounts_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bail" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bail_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="product_join_cost" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="join_cost" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="product_exit_cost" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="exit_cost" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="file_contract_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="img_view_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="struts" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="products_description" type="varchar(1024)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="del_flag" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pub_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="day_rate_calculation" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prod_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="extend_attribute" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_modified_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_modified_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="product_spec" columnName="pub_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product_spec" columnName="created_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product_spec" columnName="last_modified_date" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>
