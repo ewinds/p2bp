@@ -178,3 +178,13 @@ oauth2:
 # ===================================================================
 
 application:
+    service-fees:
+        - key: none
+          value: 无
+        - key: amount
+          value: 金额
+        - key: rate
+          value: 比率
+        - key: annualRate
+          value: 年化收益率
+

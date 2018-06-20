@@ -2,6 +2,9 @@ package io.github.ewinds.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Properties specific to Loan.
  * <p>
@@ -11,4 +14,30 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
 
+    private final List<KeyValue> serviceFees = new ArrayList<>();
+
+    public static class KeyValue {
+        public String key;
+        public String value;
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
+
+    public List<KeyValue> getServiceFees() {
+        return serviceFees;
+    }
 }
