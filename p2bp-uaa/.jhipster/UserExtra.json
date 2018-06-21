@@ -1,0 +1,93 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "userExtra"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nickname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "realName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "idCard",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "points",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "referralCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "idCardVerified",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "idCardErrorTimes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "comment",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "districtCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "university",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "diploma",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "company",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "industry",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "scale",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "position",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "income",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "recommendedByPhone",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180621034956",
+    "entityTableName": "user_extra",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

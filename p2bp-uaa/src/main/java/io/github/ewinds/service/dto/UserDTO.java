@@ -53,6 +53,42 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private String phone;
+
+    private String nickname;
+
+    private String realName;
+
+    private String idCard;
+
+    private Long points;
+
+    private String referralCode;
+
+    private Boolean idCardVerified;
+
+    private Integer idCardErrorTimes;
+
+    private String comment;
+
+    private String districtCode;
+
+    private String university;
+
+    private String diploma;
+
+    private String company;
+
+    private String industry;
+
+    private String scale;
+
+    private String position;
+
+    private String income;
+
+    private String recommendedByPhone;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -179,6 +215,150 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public Long getPoints() {
+        return points;
+    }
+
+    public void setPoints(Long points) {
+        this.points = points;
+    }
+
+    public String getReferralCode() {
+        return referralCode;
+    }
+
+    public void setReferralCode(String referralCode) {
+        this.referralCode = referralCode;
+    }
+
+    public Boolean getIdCardVerified() {
+        return idCardVerified;
+    }
+
+    public void setIdCardVerified(Boolean idCardVerified) {
+        this.idCardVerified = idCardVerified;
+    }
+
+    public Integer getIdCardErrorTimes() {
+        return idCardErrorTimes;
+    }
+
+    public void setIdCardErrorTimes(Integer idCardErrorTimes) {
+        this.idCardErrorTimes = idCardErrorTimes;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getDistrictCode() {
+        return districtCode;
+    }
+
+    public void setDistrictCode(String districtCode) {
+        this.districtCode = districtCode;
+    }
+
+    public String getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(String university) {
+        this.university = university;
+    }
+
+    public String getDiploma() {
+        return diploma;
+    }
+
+    public void setDiploma(String diploma) {
+        this.diploma = diploma;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
+    }
+
+    public String getScale() {
+        return scale;
+    }
+
+    public void setScale(String scale) {
+        this.scale = scale;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getIncome() {
+        return income;
+    }
+
+    public void setIncome(String income) {
+        this.income = income;
+    }
+
+    public String getRecommendedByPhone() {
+        return recommendedByPhone;
+    }
+
+    public void setRecommendedByPhone(String recommendedByPhone) {
+        this.recommendedByPhone = recommendedByPhone;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -189,11 +369,29 @@ public class UserDTO {
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
-            ", createdBy=" + createdBy +
+            ", createdBy='" + createdBy + '\'' +
             ", createdDate=" + createdDate +
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
-            "}";
+            ", phone='" + phone + '\'' +
+            ", nickname='" + nickname + '\'' +
+            ", realName='" + realName + '\'' +
+            ", idCard='" + idCard + '\'' +
+            ", points=" + points +
+            ", referralCode='" + referralCode + '\'' +
+            ", idCardVerified=" + idCardVerified +
+            ", idCardErrorTimes=" + idCardErrorTimes +
+            ", comment='" + comment + '\'' +
+            ", districtCode='" + districtCode + '\'' +
+            ", university='" + university + '\'' +
+            ", diploma='" + diploma + '\'' +
+            ", company='" + company + '\'' +
+            ", industry='" + industry + '\'' +
+            ", scale='" + scale + '\'' +
+            ", position='" + position + '\'' +
+            ", income='" + income + '\'' +
+            ", recommendedByPhone='" + recommendedByPhone + '\'' +
+            '}';
     }
 }

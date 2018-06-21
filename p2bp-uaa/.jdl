@@ -1,0 +1,24 @@
+entity UserExtra {
+    phone String,
+    nickname String,
+    realName String,
+    idCard String,
+    points Long,
+    referralCode String,
+    idCardVerified Boolean,
+    idCardErrorTimes Integer,
+    comment String,
+    districtCode String,
+    university String,
+    diploma String,
+    company String,
+    industry String,
+    scale String,
+    position String,
+    income String,
+    recommendedByPhone String
+}
+
+relationship OneToOne {
+	UserExtra{user} to User
+}

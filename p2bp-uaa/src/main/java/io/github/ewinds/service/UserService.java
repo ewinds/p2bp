@@ -3,8 +3,10 @@ package io.github.ewinds.service;
 import io.github.ewinds.config.CacheConfiguration;
 import io.github.ewinds.domain.Authority;
 import io.github.ewinds.domain.User;
+import io.github.ewinds.domain.UserExtra;
 import io.github.ewinds.repository.AuthorityRepository;
 import io.github.ewinds.config.Constants;
+import io.github.ewinds.repository.UserExtraRepository;
 import io.github.ewinds.repository.UserRepository;
 import io.github.ewinds.security.AuthoritiesConstants;
 import io.github.ewinds.security.SecurityUtils;
@@ -37,17 +39,20 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final UserExtraRepository userExtraRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, UserExtraRepository userExtraRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.userExtraRepository = userExtraRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -115,6 +120,31 @@ public class UserService {
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
         log.debug("Created Information for User: {}", newUser);
+
+        // Create and save the UserExtra entity
+        UserExtra newUserExtra = new UserExtra();
+        newUserExtra.setUser(newUser);
+        newUserExtra.setPhone(userDTO.getPhone());
+        newUserExtra.setNickname(userDTO.getNickname());
+        newUserExtra.setRealName(userDTO.getRealName());
+        newUserExtra.setIdCard(userDTO.getIdCard());
+        newUserExtra.setPoints(userDTO.getPoints());
+        newUserExtra.setReferralCode(userDTO.getReferralCode());
+        newUserExtra.setIdCardVerified(userDTO.getIdCardVerified());
+        newUserExtra.setIdCardErrorTimes(userDTO.getIdCardErrorTimes());
+        newUserExtra.setComment(userDTO.getComment());
+        newUserExtra.setDistrictCode(userDTO.getDistrictCode());
+        newUserExtra.setUniversity(userDTO.getUniversity());
+        newUserExtra.setDiploma(userDTO.getDiploma());
+        newUserExtra.setCompany(userDTO.getCompany());
+        newUserExtra.setIndustry(userDTO.getIndustry());
+        newUserExtra.setScale(userDTO.getScale());
+        newUserExtra.setPosition(userDTO.getPosition());
+        newUserExtra.setIncome(userDTO.getIncome());
+        newUserExtra.setRecommendedByPhone(userDTO.getRecommendedByPhone());
+        userExtraRepository.save(newUserExtra);
+        log.debug("Created Information for UserExtra: {}", newUserExtra);
+
         return newUser;
     }
 
