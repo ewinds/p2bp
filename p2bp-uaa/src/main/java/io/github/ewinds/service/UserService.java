@@ -296,4 +296,8 @@ public class UserService {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public Page<UserDTO> getAllManagedUsersByAuthority(Pageable pageable, String authority) {
+        return userRepository.findAllByAuthority(pageable, authority).map(UserDTO::new);
+    }
 }

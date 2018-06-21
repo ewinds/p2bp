@@ -159,6 +159,18 @@ public class UserResource {
     }
 
     /**
+     * @return a string list of the all of the roles
+     */
+    @GetMapping("/users/authorities/{authority}")
+    @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<List<UserDTO>> getUsersByAuthority(Pageable pageable, @PathVariable String authority) {
+        final Page<UserDTO> page = userService.getAllManagedUsersByAuthority(pageable, authority);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * GET /users/:login : get the "login" user.
      *
      * @param login the login of the user to find
