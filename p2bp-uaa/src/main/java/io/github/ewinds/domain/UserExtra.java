@@ -73,7 +73,7 @@ public class UserExtra implements Serializable {
     private String recommendedByPhone;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn(name = "id")
     @MapsId
     private User user;
 

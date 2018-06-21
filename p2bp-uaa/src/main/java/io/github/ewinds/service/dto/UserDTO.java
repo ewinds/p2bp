@@ -109,6 +109,27 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+
+        if (user.getUserExtra() != null) {
+            this.phone = user.getUserExtra().getPhone();
+            this.nickname = user.getUserExtra().getNickname();
+            this.realName = user.getUserExtra().getRealName();
+            this.idCard = user.getUserExtra().getIdCard();
+            this.points = user.getUserExtra().getPoints();
+            this.referralCode = user.getUserExtra().getReferralCode();
+            this.idCardVerified = user.getUserExtra().isIdCardVerified();
+            this.idCardErrorTimes = user.getUserExtra().getIdCardErrorTimes();
+            this.comment = user.getUserExtra().getComment();
+            this.districtCode = user.getUserExtra().getDistrictCode();
+            this.university = user.getUserExtra().getUniversity();
+            this.diploma = user.getUserExtra().getDiploma();
+            this.company = user.getUserExtra().getCompany();
+            this.industry = user.getUserExtra().getIndustry();
+            this.scale = user.getUserExtra().getScale();
+            this.position = user.getUserExtra().getPosition();
+            this.income = user.getUserExtra().getIncome();
+            this.recommendedByPhone = user.getUserExtra().getRecommendedByPhone();
+        }
     }
 
     public Long getId() {
