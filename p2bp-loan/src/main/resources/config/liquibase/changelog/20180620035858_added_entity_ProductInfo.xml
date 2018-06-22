@@ -58,7 +58,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="interest_rate_type" type="varchar(255)">
+            <column name="period_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

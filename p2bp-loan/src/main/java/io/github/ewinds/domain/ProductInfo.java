@@ -9,12 +9,14 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
+import io.github.ewinds.domain.enumeration.InterestCalculationPeriod;
+
 /**
  * A ProductInfo.
  */
 @Entity
 @Table(name = "product_info")
-public class ProductInfo extends AbstractAuditingEntity implements Serializable {
+public class ProductInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,8 +51,9 @@ public class ProductInfo extends AbstractAuditingEntity implements Serializable 
     @Column(name = "repay_type")
     private String repayType;
 
-    @Column(name = "interest_rate_type")
-    private String interestRateType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "period_type")
+    private InterestCalculationPeriod periodType;
 
     @Column(name = "period")
     private Integer period;
@@ -212,6 +215,18 @@ public class ProductInfo extends AbstractAuditingEntity implements Serializable 
     @Column(name = "guarantee_id")
     private String guaranteeId;
 
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "created_date")
+    private Instant createdDate;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
+
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+
     @OneToOne
     @JoinColumn(unique = true)
     private Product product;
@@ -345,17 +360,17 @@ public class ProductInfo extends AbstractAuditingEntity implements Serializable 
         this.repayType = repayType;
     }
 
-    public String getInterestRateType() {
-        return interestRateType;
+    public InterestCalculationPeriod getPeriodType() {
+        return periodType;
     }
 
-    public ProductInfo interestRateType(String interestRateType) {
-        this.interestRateType = interestRateType;
+    public ProductInfo periodType(InterestCalculationPeriod periodType) {
+        this.periodType = periodType;
         return this;
     }
 
-    public void setInterestRateType(String interestRateType) {
-        this.interestRateType = interestRateType;
+    public void setPeriodType(InterestCalculationPeriod periodType) {
+        this.periodType = periodType;
     }
 
     public Integer getPeriod() {
@@ -1047,6 +1062,58 @@ public class ProductInfo extends AbstractAuditingEntity implements Serializable 
         this.guaranteeId = guaranteeId;
     }
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public ProductInfo createdBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public ProductInfo createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public ProductInfo lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public ProductInfo lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+        return this;
+    }
+
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -1107,7 +1174,7 @@ public class ProductInfo extends AbstractAuditingEntity implements Serializable 
             ", successDate='" + getSuccessDate() + "'" +
             ", startInterestDate='" + getStartInterestDate() + "'" +
             ", repayType='" + getRepayType() + "'" +
-            ", interestRateType='" + getInterestRateType() + "'" +
+            ", periodType='" + getPeriodType() + "'" +
             ", period=" + getPeriod() +
             ", repayTimes=" + getRepayTimes() +
             ", manageFee=" + getManageFee() +

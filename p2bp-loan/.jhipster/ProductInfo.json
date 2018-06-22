@@ -54,8 +54,9 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "interestRateType",
-            "fieldType": "String"
+            "fieldName": "periodType",
+            "fieldType": "InterestCalculationPeriod",
+            "fieldValues": "MONTH,DAY"
         },
         {
             "fieldName": "period",

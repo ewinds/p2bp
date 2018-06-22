@@ -34,6 +34,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import io.github.ewinds.domain.enumeration.InterestCalculationPeriod;
 /**
  * Test class for the ProductInfoResource REST controller.
  *
@@ -70,8 +71,8 @@ public class ProductInfoResourceIntTest {
     private static final String DEFAULT_REPAY_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_REPAY_TYPE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_INTEREST_RATE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_INTEREST_RATE_TYPE = "BBBBBBBBBB";
+    private static final InterestCalculationPeriod DEFAULT_PERIOD_TYPE = InterestCalculationPeriod.MONTH;
+    private static final InterestCalculationPeriod UPDATED_PERIOD_TYPE = InterestCalculationPeriod.DAY;
 
     private static final Integer DEFAULT_PERIOD = 1;
     private static final Integer UPDATED_PERIOD = 2;
@@ -291,7 +292,7 @@ public class ProductInfoResourceIntTest {
             .successDate(DEFAULT_SUCCESS_DATE)
             .startInterestDate(DEFAULT_START_INTEREST_DATE)
             .repayType(DEFAULT_REPAY_TYPE)
-            .interestRateType(DEFAULT_INTEREST_RATE_TYPE)
+            .periodType(DEFAULT_PERIOD_TYPE)
             .period(DEFAULT_PERIOD)
             .repayTimes(DEFAULT_REPAY_TIMES)
             .manageFee(DEFAULT_MANAGE_FEE)
@@ -344,7 +345,11 @@ public class ProductInfoResourceIntTest {
             .guaranteeCheckFlg(DEFAULT_GUARANTEE_CHECK_FLG)
             .purpose(DEFAULT_PURPOSE)
             .estateCheckFlg(DEFAULT_ESTATE_CHECK_FLG)
-            .guaranteeId(DEFAULT_GUARANTEE_ID);
+            .guaranteeId(DEFAULT_GUARANTEE_ID)
+            .createdBy(DEFAULT_CREATED_BY)
+            .createdDate(DEFAULT_CREATED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
         return productInfo;
     }
 
@@ -377,7 +382,7 @@ public class ProductInfoResourceIntTest {
         assertThat(testProductInfo.getSuccessDate()).isEqualTo(DEFAULT_SUCCESS_DATE);
         assertThat(testProductInfo.getStartInterestDate()).isEqualTo(DEFAULT_START_INTEREST_DATE);
         assertThat(testProductInfo.getRepayType()).isEqualTo(DEFAULT_REPAY_TYPE);
-        assertThat(testProductInfo.getInterestRateType()).isEqualTo(DEFAULT_INTEREST_RATE_TYPE);
+        assertThat(testProductInfo.getPeriodType()).isEqualTo(DEFAULT_PERIOD_TYPE);
         assertThat(testProductInfo.getPeriod()).isEqualTo(DEFAULT_PERIOD);
         assertThat(testProductInfo.getRepayTimes()).isEqualTo(DEFAULT_REPAY_TIMES);
         assertThat(testProductInfo.getManageFee()).isEqualTo(DEFAULT_MANAGE_FEE);
@@ -476,7 +481,7 @@ public class ProductInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].successDate").value(hasItem(DEFAULT_SUCCESS_DATE.toString())))
             .andExpect(jsonPath("$.[*].startInterestDate").value(hasItem(DEFAULT_START_INTEREST_DATE.toString())))
             .andExpect(jsonPath("$.[*].repayType").value(hasItem(DEFAULT_REPAY_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].interestRateType").value(hasItem(DEFAULT_INTEREST_RATE_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].periodType").value(hasItem(DEFAULT_PERIOD_TYPE.toString())))
             .andExpect(jsonPath("$.[*].period").value(hasItem(DEFAULT_PERIOD)))
             .andExpect(jsonPath("$.[*].repayTimes").value(hasItem(DEFAULT_REPAY_TIMES)))
             .andExpect(jsonPath("$.[*].manageFee").value(hasItem(DEFAULT_MANAGE_FEE.intValue())))
@@ -556,7 +561,7 @@ public class ProductInfoResourceIntTest {
             .andExpect(jsonPath("$.successDate").value(DEFAULT_SUCCESS_DATE.toString()))
             .andExpect(jsonPath("$.startInterestDate").value(DEFAULT_START_INTEREST_DATE.toString()))
             .andExpect(jsonPath("$.repayType").value(DEFAULT_REPAY_TYPE.toString()))
-            .andExpect(jsonPath("$.interestRateType").value(DEFAULT_INTEREST_RATE_TYPE.toString()))
+            .andExpect(jsonPath("$.periodType").value(DEFAULT_PERIOD_TYPE.toString()))
             .andExpect(jsonPath("$.period").value(DEFAULT_PERIOD))
             .andExpect(jsonPath("$.repayTimes").value(DEFAULT_REPAY_TIMES))
             .andExpect(jsonPath("$.manageFee").value(DEFAULT_MANAGE_FEE.intValue()))
@@ -645,7 +650,7 @@ public class ProductInfoResourceIntTest {
             .successDate(UPDATED_SUCCESS_DATE)
             .startInterestDate(UPDATED_START_INTEREST_DATE)
             .repayType(UPDATED_REPAY_TYPE)
-            .interestRateType(UPDATED_INTEREST_RATE_TYPE)
+            .periodType(UPDATED_PERIOD_TYPE)
             .period(UPDATED_PERIOD)
             .repayTimes(UPDATED_REPAY_TIMES)
             .manageFee(UPDATED_MANAGE_FEE)
@@ -698,7 +703,11 @@ public class ProductInfoResourceIntTest {
             .guaranteeCheckFlg(UPDATED_GUARANTEE_CHECK_FLG)
             .purpose(UPDATED_PURPOSE)
             .estateCheckFlg(UPDATED_ESTATE_CHECK_FLG)
-            .guaranteeId(UPDATED_GUARANTEE_ID);
+            .guaranteeId(UPDATED_GUARANTEE_ID)
+            .createdBy(UPDATED_CREATED_BY)
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restProductInfoMockMvc.perform(put("/api/product-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -718,7 +727,7 @@ public class ProductInfoResourceIntTest {
         assertThat(testProductInfo.getSuccessDate()).isEqualTo(UPDATED_SUCCESS_DATE);
         assertThat(testProductInfo.getStartInterestDate()).isEqualTo(UPDATED_START_INTEREST_DATE);
         assertThat(testProductInfo.getRepayType()).isEqualTo(UPDATED_REPAY_TYPE);
-        assertThat(testProductInfo.getInterestRateType()).isEqualTo(UPDATED_INTEREST_RATE_TYPE);
+        assertThat(testProductInfo.getPeriodType()).isEqualTo(UPDATED_PERIOD_TYPE);
         assertThat(testProductInfo.getPeriod()).isEqualTo(UPDATED_PERIOD);
         assertThat(testProductInfo.getRepayTimes()).isEqualTo(UPDATED_REPAY_TIMES);
         assertThat(testProductInfo.getManageFee()).isEqualTo(UPDATED_MANAGE_FEE);
