@@ -144,7 +144,7 @@ entity Activity {
     activityName String,
     beginTime Instant,
     endTime Instant,
-    activityType Integer,
+    activityType ActivityType,
     cashId Integer,
     activityRate BigDecimal,
     extraRate BigDecimal,
@@ -227,4 +227,8 @@ relationship OneToOne {
 
 relationship OneToOne {
     Product{originIndividual} to OriginIndividual
+}
+
+enum ActivityType {
+    CASH, INTEREST, RATE, OTHER
 }

@@ -34,7 +34,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="activity_type" type="integer">
+            <column name="activity_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

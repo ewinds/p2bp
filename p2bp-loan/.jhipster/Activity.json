@@ -16,7 +16,8 @@
         },
         {
             "fieldName": "activityType",
-            "fieldType": "Integer"
+            "fieldType": "ActivityType",
+            "fieldValues": "CASH,INTEREST,RATE,OTHER"
         },
         {
             "fieldName": "cashId",

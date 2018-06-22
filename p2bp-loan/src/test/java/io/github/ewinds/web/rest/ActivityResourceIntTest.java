@@ -34,6 +34,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import io.github.ewinds.domain.enumeration.ActivityType;
 /**
  * Test class for the ActivityResource REST controller.
  *
@@ -52,8 +53,8 @@ public class ActivityResourceIntTest {
     private static final Instant DEFAULT_END_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_END_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Integer DEFAULT_ACTIVITY_TYPE = 1;
-    private static final Integer UPDATED_ACTIVITY_TYPE = 2;
+    private static final ActivityType DEFAULT_ACTIVITY_TYPE = ActivityType.CASH;
+    private static final ActivityType UPDATED_ACTIVITY_TYPE = ActivityType.INTEREST;
 
     private static final Integer DEFAULT_CASH_ID = 1;
     private static final Integer UPDATED_CASH_ID = 2;
@@ -136,7 +137,11 @@ public class ActivityResourceIntTest {
             .activityTab(DEFAULT_ACTIVITY_TAB)
             .activityDesc(DEFAULT_ACTIVITY_DESC)
             .delFlag(DEFAULT_DEL_FLAG)
-            .imageUrl(DEFAULT_IMAGE_URL);
+            .imageUrl(DEFAULT_IMAGE_URL)
+            .createdBy(DEFAULT_CREATED_BY)
+            .createdDate(DEFAULT_CREATED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
         return activity;
     }
 
@@ -210,7 +215,7 @@ public class ActivityResourceIntTest {
             .andExpect(jsonPath("$.[*].activityName").value(hasItem(DEFAULT_ACTIVITY_NAME.toString())))
             .andExpect(jsonPath("$.[*].beginTime").value(hasItem(DEFAULT_BEGIN_TIME.toString())))
             .andExpect(jsonPath("$.[*].endTime").value(hasItem(DEFAULT_END_TIME.toString())))
-            .andExpect(jsonPath("$.[*].activityType").value(hasItem(DEFAULT_ACTIVITY_TYPE)))
+            .andExpect(jsonPath("$.[*].activityType").value(hasItem(DEFAULT_ACTIVITY_TYPE.toString())))
             .andExpect(jsonPath("$.[*].cashId").value(hasItem(DEFAULT_CASH_ID)))
             .andExpect(jsonPath("$.[*].activityRate").value(hasItem(DEFAULT_ACTIVITY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].extraRate").value(hasItem(DEFAULT_EXTRA_RATE.intValue())))
@@ -238,7 +243,7 @@ public class ActivityResourceIntTest {
             .andExpect(jsonPath("$.activityName").value(DEFAULT_ACTIVITY_NAME.toString()))
             .andExpect(jsonPath("$.beginTime").value(DEFAULT_BEGIN_TIME.toString()))
             .andExpect(jsonPath("$.endTime").value(DEFAULT_END_TIME.toString()))
-            .andExpect(jsonPath("$.activityType").value(DEFAULT_ACTIVITY_TYPE))
+            .andExpect(jsonPath("$.activityType").value(DEFAULT_ACTIVITY_TYPE.toString()))
             .andExpect(jsonPath("$.cashId").value(DEFAULT_CASH_ID))
             .andExpect(jsonPath("$.activityRate").value(DEFAULT_ACTIVITY_RATE.intValue()))
             .andExpect(jsonPath("$.extraRate").value(DEFAULT_EXTRA_RATE.intValue()))
@@ -282,7 +287,11 @@ public class ActivityResourceIntTest {
             .activityTab(UPDATED_ACTIVITY_TAB)
             .activityDesc(UPDATED_ACTIVITY_DESC)
             .delFlag(UPDATED_DEL_FLAG)
-            .imageUrl(UPDATED_IMAGE_URL);
+            .imageUrl(UPDATED_IMAGE_URL)
+            .createdBy(UPDATED_CREATED_BY)
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restActivityMockMvc.perform(put("/api/activities")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

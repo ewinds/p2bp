@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
+import io.github.ewinds.domain.enumeration.ActivityType;
+
 /**
  * A Activity.
  */
@@ -31,8 +33,9 @@ public class Activity extends AbstractAuditingEntity implements Serializable {
     @Column(name = "end_time")
     private Instant endTime;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "activity_type")
-    private Integer activityType;
+    private ActivityType activityType;
 
     @Column(name = "cash_id")
     private Integer cashId;
@@ -104,16 +107,16 @@ public class Activity extends AbstractAuditingEntity implements Serializable {
         this.endTime = endTime;
     }
 
-    public Integer getActivityType() {
+    public ActivityType getActivityType() {
         return activityType;
     }
 
-    public Activity activityType(Integer activityType) {
+    public Activity activityType(ActivityType activityType) {
         this.activityType = activityType;
         return this;
     }
 
-    public void setActivityType(Integer activityType) {
+    public void setActivityType(ActivityType activityType) {
         this.activityType = activityType;
     }
 
@@ -237,7 +240,7 @@ public class Activity extends AbstractAuditingEntity implements Serializable {
             ", activityName='" + getActivityName() + "'" +
             ", beginTime='" + getBeginTime() + "'" +
             ", endTime='" + getEndTime() + "'" +
-            ", activityType=" + getActivityType() +
+            ", activityType='" + getActivityType() + "'" +
             ", cashId=" + getCashId() +
             ", activityRate=" + getActivityRate() +
             ", extraRate=" + getExtraRate() +
