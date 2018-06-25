@@ -45,6 +45,9 @@ import io.github.ewinds.domain.enumeration.InterestCalculationPeriod;
 @SpringBootTest(classes = {LoanApp.class, SecurityBeanOverrideConfiguration.class})
 public class ProductResourceIntTest {
 
+    private static final Long DEFAULT_BORROWER = 1L;
+    private static final Long UPDATED_BORROWER = 2L;
+
     private static final String DEFAULT_CONTRACT_NO = "AAAAAAAAAA";
     private static final String UPDATED_CONTRACT_NO = "BBBBBBBBBB";
 
@@ -344,6 +347,7 @@ public class ProductResourceIntTest {
      */
     public static Product createEntity(EntityManager em) {
         Product product = new Product()
+            .borrower(DEFAULT_BORROWER)
             .contractNo(DEFAULT_CONTRACT_NO)
             .contractId(DEFAULT_CONTRACT_ID)
             .productsType(DEFAULT_PRODUCTS_TYPE)
@@ -454,6 +458,7 @@ public class ProductResourceIntTest {
         List<Product> productList = productRepository.findAll();
         assertThat(productList).hasSize(databaseSizeBeforeCreate + 1);
         Product testProduct = productList.get(productList.size() - 1);
+        assertThat(testProduct.getBorrower()).isEqualTo(DEFAULT_BORROWER);
         assertThat(testProduct.getContractNo()).isEqualTo(DEFAULT_CONTRACT_NO);
         assertThat(testProduct.getContractId()).isEqualTo(DEFAULT_CONTRACT_ID);
         assertThat(testProduct.getProductsType()).isEqualTo(DEFAULT_PRODUCTS_TYPE);
@@ -573,6 +578,7 @@ public class ProductResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
+            .andExpect(jsonPath("$.[*].borrower").value(hasItem(DEFAULT_BORROWER.intValue())))
             .andExpect(jsonPath("$.[*].contractNo").value(hasItem(DEFAULT_CONTRACT_NO.toString())))
             .andExpect(jsonPath("$.[*].contractId").value(hasItem(DEFAULT_CONTRACT_ID.toString())))
             .andExpect(jsonPath("$.[*].productsType").value(hasItem(DEFAULT_PRODUCTS_TYPE.toString())))
@@ -673,6 +679,7 @@ public class ProductResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(product.getId().intValue()))
+            .andExpect(jsonPath("$.borrower").value(DEFAULT_BORROWER.intValue()))
             .andExpect(jsonPath("$.contractNo").value(DEFAULT_CONTRACT_NO.toString()))
             .andExpect(jsonPath("$.contractId").value(DEFAULT_CONTRACT_ID.toString()))
             .andExpect(jsonPath("$.productsType").value(DEFAULT_PRODUCTS_TYPE.toString()))
@@ -782,6 +789,7 @@ public class ProductResourceIntTest {
         // Disconnect from session so that the updates on updatedProduct are not directly saved in db
         em.detach(updatedProduct);
         updatedProduct
+            .borrower(UPDATED_BORROWER)
             .contractNo(UPDATED_CONTRACT_NO)
             .contractId(UPDATED_CONTRACT_ID)
             .productsType(UPDATED_PRODUCTS_TYPE)
@@ -879,6 +887,7 @@ public class ProductResourceIntTest {
         List<Product> productList = productRepository.findAll();
         assertThat(productList).hasSize(databaseSizeBeforeUpdate);
         Product testProduct = productList.get(productList.size() - 1);
+        assertThat(testProduct.getBorrower()).isEqualTo(UPDATED_BORROWER);
         assertThat(testProduct.getContractNo()).isEqualTo(UPDATED_CONTRACT_NO);
         assertThat(testProduct.getContractId()).isEqualTo(UPDATED_CONTRACT_ID);
         assertThat(testProduct.getProductsType()).isEqualTo(UPDATED_PRODUCTS_TYPE);

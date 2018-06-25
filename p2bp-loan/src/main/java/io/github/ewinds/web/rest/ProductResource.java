@@ -1,9 +1,13 @@
 package io.github.ewinds.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import io.github.ewinds.client.CustomerServiceClient;
 import io.github.ewinds.domain.Product;
 
 import io.github.ewinds.repository.ProductRepository;
+import io.github.ewinds.service.dto.CustomerDTO;
+import io.github.ewinds.service.dto.ProductDTO;
+import io.github.ewinds.service.mapper.ProductMapper;
 import io.github.ewinds.web.rest.errors.BadRequestAlertException;
 import io.github.ewinds.web.rest.util.HeaderUtil;
 import io.github.ewinds.web.rest.util.PaginationUtil;
@@ -23,6 +27,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Product.
@@ -37,8 +42,11 @@ public class ProductResource {
 
     private final ProductRepository productRepository;
 
-    public ProductResource(ProductRepository productRepository) {
+    private final CustomerServiceClient customerServiceClient;
+
+    public ProductResource(ProductRepository productRepository, CustomerServiceClient customerServiceClient) {
         this.productRepository = productRepository;
+        this.customerServiceClient = customerServiceClient;
     }
 
     /**
@@ -91,11 +99,14 @@ public class ProductResource {
      */
     @GetMapping("/products")
     @Timed
-    public ResponseEntity<List<Product>> getAllProducts(Pageable pageable) {
+    public ResponseEntity<List<ProductDTO>> getAllProducts(Pageable pageable) {
         log.debug("REST request to get a page of Products");
         Page<Product> page = productRepository.findAll(pageable);
+        List<Product> products = page.getContent();
+        List<CustomerDTO> customers = customerServiceClient.getCustomersByIds(products.stream().map(Product::getId).collect(Collectors.toList()));
+        List<ProductDTO> productsWithCustomer = products.stream().map(product -> ProductMapper.INSTANCE.productToProductDto(product).customer(customers.stream().filter(customerDTO -> customerDTO.getId() == product.getBorrower()).findFirst().get())).collect(Collectors.toList());
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(productsWithCustomer, headers, HttpStatus.OK);
     }
 
     /**

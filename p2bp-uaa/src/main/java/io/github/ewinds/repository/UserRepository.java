@@ -49,4 +49,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select user from User user join user.authorities authorities where authorities.name = :authority")
     Page<User> findAllByAuthority(Pageable pageable, @Param("authority") String authority);
+
+    List<User> findByIdIn(List<Long> ids);
 }

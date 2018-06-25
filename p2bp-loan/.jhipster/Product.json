@@ -38,6 +38,10 @@
     ],
     "fields": [
         {
+            "fieldName": "borrower",
+            "fieldType": "Long"
+        },
+        {
             "fieldName": "contractNo",
             "fieldType": "String"
         },

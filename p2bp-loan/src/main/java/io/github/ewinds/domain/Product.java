@@ -26,6 +26,9 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "borrower")
+    private Long borrower;
+
     @Column(name = "contract_no")
     private String contractNo;
 
@@ -302,6 +305,19 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getBorrower() {
+        return borrower;
+    }
+
+    public Product borrower(Long borrower) {
+        this.borrower = borrower;
+        return this;
+    }
+
+    public void setBorrower(Long borrower) {
+        this.borrower = borrower;
     }
 
     public String getContractNo() {
@@ -1473,6 +1489,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     public String toString() {
         return "Product{" +
             "id=" + getId() +
+            ", borrower=" + getBorrower() +
             ", contractNo='" + getContractNo() + "'" +
             ", contractId='" + getContractId() + "'" +
             ", productsType='" + getProductsType() + "'" +

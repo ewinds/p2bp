@@ -1,4 +1,5 @@
 entity Product {
+    borrower Long,
     contractNo String,
     contractId String,
     productsType String,
