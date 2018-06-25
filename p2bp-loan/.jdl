@@ -22,10 +22,7 @@ entity Product {
     createdBy String,
     createdDate Instant,
     lastModifiedBy String,
-    lastModifiedDate Instant
-}
-
-entity ProductInfo {
+    lastModifiedDate Instant,
     amount BigDecimal,
     interestRate BigDecimal,
     validDay Integer,
@@ -88,11 +85,7 @@ entity ProductInfo {
     guaranteeCheckFlg String,
     purpose String maxlength(1024),
     estateCheckFlg String,
-    guaranteeId String,
-    createdBy String,
-    createdDate Instant,
-    lastModifiedBy String,
-    lastModifiedDate Instant
+    guaranteeId String
 }
 
 entity ProductSpec {
@@ -158,12 +151,8 @@ entity Activity {
     lastModifiedDate Instant
 }
 
-relationship OneToOne {
-	ProductInfo{product} to Product
-}
-
 relationship ManyToOne {
-    ProductInfo{spec} to ProductSpec
+    Product{spec} to ProductSpec
 }
 
 relationship ManyToOne {

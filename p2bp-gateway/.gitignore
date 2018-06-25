@@ -126,6 +126,7 @@ Desktop.ini
 *.*~
 *~
 .merge_file*
+.h2.server.properties
 
 ######################
 # Gradle Wrapper

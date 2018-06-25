@@ -20,6 +20,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="origin_individual"/>
 
+        <addForeignKeyConstraint baseColumnNames="spec_id"
+                                 baseTableName="product"
+                                 constraintName="fk_product_spec_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_spec"/>
+
         <addForeignKeyConstraint baseColumnNames="activity_id"
                                  baseTableName="product"
                                  constraintName="fk_product_activity_id"

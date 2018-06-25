@@ -19,6 +19,12 @@
         },
         {
             "relationshipType": "many-to-one",
+            "relationshipName": "spec",
+            "otherEntityName": "productSpec",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
             "relationshipName": "activity",
             "otherEntityName": "activity",
             "otherEntityField": "id"
@@ -127,6 +133,263 @@
         {
             "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "interestRate",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "validDay",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "publishDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "successDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "startInterestDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "repayType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "periodType",
+            "fieldType": "InterestCalculationPeriod",
+            "fieldValues": "MONTH,DAY"
+        },
+        {
+            "fieldName": "period",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "repayTimes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "manageFee",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "manageFeeScale",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "partFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fullFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "failedFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "amountYes",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "amountWait",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "amountScale",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "minTenderAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "maxTenderAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "tenderAwardFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tenderFailureAwardFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tenderAwardAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "tenderAwardScale",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "directionalPwd",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "secondFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dueinAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "investTotalAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "wanderFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tenderAutoPaymentFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "partAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "maxPart",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tenderMaxTimes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "prepaymentFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prepaymentInterestMinDays",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "prepaymentMinAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "prepaymentMaxTimes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "guaranteeType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guaranteeOthers",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "serviceFeeType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "serviceFee",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "parkingFee",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "updDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "rateCalculationType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fullDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "noviceFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "rateType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "rateInputValue",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "lastReplayDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "transferCanFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "transferFrozeTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "minIncreasingAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "ver",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "idCardCheckFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "marriageCheckFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "householdCheckFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "credibilityCheckFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guaranteeCheckFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "purpose",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1024
+        },
+        {
+            "fieldName": "estateCheckFlg",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guaranteeId",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180620035857",

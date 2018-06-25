@@ -117,11 +117,267 @@
             <column name="last_modified_date" type="timestamp">
                 <constraints nullable="true" />
             </column>
+
+            <column name="amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="interest_rate" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="valid_day" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="publish_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="start_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="end_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="success_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="start_interest_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="repay_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="period_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="period" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="repay_times" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="manage_fee" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="manage_fee_scale" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="part_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="full_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="failed_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="amount_yes" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="amount_wait" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="amount_scale" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="min_tender_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="max_tender_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tender_award_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tender_failure_award_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tender_award_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tender_award_scale" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="directional_pwd" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="second_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="duein_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="invest_total_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="wander_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tender_auto_payment_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="part_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="max_part" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tender_max_times" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prepayment_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prepayment_interest_min_days" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prepayment_min_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prepayment_max_times" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_others" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="service_fee_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="service_fee" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="parking_fee" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="upd_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="rate_calculation_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="full_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="novice_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="rate_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="rate_input_value" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_replay_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="transfer_can_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="transfer_froze_time" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="min_increasing_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="ver" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="id_card_check_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="marriage_check_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="household_check_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="credibility_check_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_check_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="purpose" type="varchar(1024)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="estate_check_flg" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="origin_enterprise_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>            <column name="origin_individual_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
+            <column name="spec_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <column name="activity_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -135,6 +391,14 @@
         <dropDefaultValue tableName="product" columnName="cancel_time" columnDataType="datetime"/>
         <dropDefaultValue tableName="product" columnName="created_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="product" columnName="last_modified_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="publish_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="start_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="end_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="success_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="start_interest_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="upd_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="full_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="product" columnName="last_replay_date" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

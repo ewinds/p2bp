@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -44,7 +45,7 @@ public class ProductResource {
      */
     @PostMapping("/products")
     @Timed
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) throws URISyntaxException {
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to save Product : {}", product);
         if (product.getId() != null) {
             throw new BadRequestAlertException("A new product cannot already have an ID", ENTITY_NAME, "idexists");
@@ -66,7 +67,7 @@ public class ProductResource {
      */
     @PutMapping("/products")
     @Timed
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product) throws URISyntaxException {
+    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to update Product : {}", product);
         if (product.getId() == null) {
             return createProduct(product);
