@@ -6,9 +6,14 @@ import io.github.ewinds.domain.Product;
 import io.github.ewinds.repository.ProductRepository;
 import io.github.ewinds.web.rest.errors.BadRequestAlertException;
 import io.github.ewinds.web.rest.util.HeaderUtil;
+import io.github.ewinds.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,14 +86,17 @@ public class ProductResource {
     /**
      * GET  /products : get all the products.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of products in body
      */
     @GetMapping("/products")
     @Timed
-    public List<Product> getAllProducts() {
-        log.debug("REST request to get all Products");
-        return productRepository.findAll();
-        }
+    public ResponseEntity<List<Product>> getAllProducts(Pageable pageable) {
+        log.debug("REST request to get a page of Products");
+        Page<Product> page = productRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /products/:id : get the "id" product.

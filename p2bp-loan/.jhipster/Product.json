@@ -395,7 +395,7 @@
     "changelogDate": "20180620035857",
     "entityTableName": "product",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "microserviceName": "loan"
