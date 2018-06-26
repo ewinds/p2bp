@@ -1,0 +1,88 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="jhipster (generated)" id="1530004473694-1">
+        <addColumn tableName="product">
+            <column name="amount_tendered" type="decimal(10, 2)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-2">
+        <addColumn tableName="product">
+            <column name="interest_calculation" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-3">
+        <addColumn tableName="product">
+            <column name="interest_calculation_ratio" type="decimal(10, 2)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-4">
+        <addColumn tableName="product">
+            <column name="is_allow_partial" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-5">
+        <addColumn tableName="product">
+            <column name="is_fulfilled" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-6">
+        <dropColumn columnName="AMOUNT_YES" tableName="PRODUCT"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-7">
+        <dropColumn columnName="FAILED_FLG" tableName="PRODUCT"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-8">
+        <dropColumn columnName="FULL_FLG" tableName="PRODUCT"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-9">
+        <dropColumn columnName="PART_FLG" tableName="PRODUCT"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-10">
+        <dropColumn columnName="RATE_CALCULATION_TYPE" tableName="PRODUCT"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-11">
+        <dropColumn columnName="RATE_INPUT_VALUE" tableName="PRODUCT"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-12">
+        <dropColumn columnName="RATE_TYPE" tableName="PRODUCT"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-13">
+        <dropColumn columnName="UPD_DATE" tableName="PRODUCT"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-14">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="activity"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-15">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="origin_enterprise"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-16">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="origin_individual"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-17">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="product"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-18">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="product_spec"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-19">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="product_type"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-20">
+        <addNotNullConstraint columnDataType="timestamp" columnName="created_date" tableName="activity"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-21">
+        <addNotNullConstraint columnDataType="timestamp" columnName="created_date" tableName="origin_enterprise"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-22">
+        <addNotNullConstraint columnDataType="timestamp" columnName="created_date" tableName="origin_individual"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-23">
+        <addNotNullConstraint columnDataType="timestamp" columnName="created_date" tableName="product"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-24">
+        <addNotNullConstraint columnDataType="timestamp" columnName="created_date" tableName="product_spec"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530004473694-25">
+        <addNotNullConstraint columnDataType="timestamp" columnName="created_date" tableName="product_type"/>
+    </changeSet>
+</databaseChangeLog>

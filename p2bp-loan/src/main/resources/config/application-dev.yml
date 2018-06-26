@@ -202,5 +202,5 @@ application:
         - key: FIXED_INTEREST
           value: 按月付息,到期还本
     payment-methods-by-day:
-        - key: MANUAL
-          value: 募集后审核计息
+        - key: DUE
+          value: 到期还本付息

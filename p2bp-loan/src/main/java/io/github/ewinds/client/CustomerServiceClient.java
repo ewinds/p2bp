@@ -10,6 +10,6 @@ import java.util.List;
 
 @FeignClient(name = "uaa")
 public interface CustomerServiceClient {
-    @PostMapping("/customers/:ids")
+    @PostMapping("/api/customers/:ids")
     List<CustomerDTO> getCustomersByIds(@Valid @RequestBody List<Long> ids);
 }

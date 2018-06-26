@@ -137,11 +137,7 @@ public class ActivityResourceIntTest {
             .activityTab(DEFAULT_ACTIVITY_TAB)
             .activityDesc(DEFAULT_ACTIVITY_DESC)
             .delFlag(DEFAULT_DEL_FLAG)
-            .imageUrl(DEFAULT_IMAGE_URL)
-            .createdBy(DEFAULT_CREATED_BY)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
+            .imageUrl(DEFAULT_IMAGE_URL);
         return activity;
     }
 
@@ -287,11 +283,7 @@ public class ActivityResourceIntTest {
             .activityTab(UPDATED_ACTIVITY_TAB)
             .activityDesc(UPDATED_ACTIVITY_DESC)
             .delFlag(UPDATED_DEL_FLAG)
-            .imageUrl(UPDATED_IMAGE_URL)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .imageUrl(UPDATED_IMAGE_URL);
 
         restActivityMockMvc.perform(put("/api/activities")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

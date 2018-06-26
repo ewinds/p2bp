@@ -196,19 +196,15 @@
             "fieldType": "BigDecimal"
         },
         {
-            "fieldName": "partFlg",
-            "fieldType": "String"
+            "fieldName": "isAllowPartial",
+            "fieldType": "Boolean"
         },
         {
-            "fieldName": "fullFlg",
-            "fieldType": "String"
+            "fieldName": "isFulfilled",
+            "fieldType": "Boolean"
         },
         {
-            "fieldName": "failedFlg",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "amountYes",
+            "fieldName": "amountTendered",
             "fieldType": "BigDecimal"
         },
         {
@@ -316,14 +312,6 @@
             "fieldType": "BigDecimal"
         },
         {
-            "fieldName": "updDate",
-            "fieldType": "Instant"
-        },
-        {
-            "fieldName": "rateCalculationType",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "fullDate",
             "fieldType": "Instant"
         },
@@ -332,11 +320,12 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "rateType",
-            "fieldType": "String"
+            "fieldName": "interestCalculation",
+            "fieldType": "InterestCalculation",
+            "fieldValues": "MANUAL,AUTO,RATIO"
         },
         {
-            "fieldName": "rateInputValue",
+            "fieldName": "interestCalculationRatio",
             "fieldType": "BigDecimal"
         },
         {

@@ -13,6 +13,8 @@ import io.github.ewinds.domain.enumeration.ProductState;
 
 import io.github.ewinds.domain.enumeration.InterestCalculationPeriod;
 
+import io.github.ewinds.domain.enumeration.InterestCalculation;
+
 /**
  * A Product.
  */
@@ -133,17 +135,14 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "manage_fee_scale", precision=10, scale=2)
     private BigDecimal manageFeeScale;
 
-    @Column(name = "part_flg")
-    private String partFlg;
+    @Column(name = "is_allow_partial")
+    private Boolean isAllowPartial;
 
-    @Column(name = "full_flg")
-    private String fullFlg;
+    @Column(name = "is_fulfilled")
+    private Boolean isFulfilled;
 
-    @Column(name = "failed_flg")
-    private String failedFlg;
-
-    @Column(name = "amount_yes", precision=10, scale=2)
-    private BigDecimal amountYes;
+    @Column(name = "amount_tendered", precision=10, scale=2)
+    private BigDecimal amountTendered;
 
     @Column(name = "amount_wait", precision=10, scale=2)
     private BigDecimal amountWait;
@@ -223,23 +222,18 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "parking_fee", precision=10, scale=2)
     private BigDecimal parkingFee;
 
-    @Column(name = "upd_date")
-    private Instant updDate;
-
-    @Column(name = "rate_calculation_type")
-    private String rateCalculationType;
-
     @Column(name = "full_date")
     private Instant fullDate;
 
     @Column(name = "novice_flg")
     private String noviceFlg;
 
-    @Column(name = "rate_type")
-    private String rateType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "interest_calculation")
+    private InterestCalculation interestCalculation;
 
-    @Column(name = "rate_input_value", precision=10, scale=2)
-    private BigDecimal rateInputValue;
+    @Column(name = "interest_calculation_ratio", precision=10, scale=2)
+    private BigDecimal interestCalculationRatio;
 
     @Column(name = "last_replay_date")
     private Instant lastReplayDate;
@@ -762,56 +756,43 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         this.manageFeeScale = manageFeeScale;
     }
 
-    public String getPartFlg() {
-        return partFlg;
+    public Boolean isIsAllowPartial() {
+        return isAllowPartial;
     }
 
-    public Product partFlg(String partFlg) {
-        this.partFlg = partFlg;
+    public Product isAllowPartial(Boolean isAllowPartial) {
+        this.isAllowPartial = isAllowPartial;
         return this;
     }
 
-    public void setPartFlg(String partFlg) {
-        this.partFlg = partFlg;
+    public void setIsAllowPartial(Boolean isAllowPartial) {
+        this.isAllowPartial = isAllowPartial;
     }
 
-    public String getFullFlg() {
-        return fullFlg;
+    public Boolean isIsFulfilled() {
+        return isFulfilled;
     }
 
-    public Product fullFlg(String fullFlg) {
-        this.fullFlg = fullFlg;
+    public Product isFulfilled(Boolean isFulfilled) {
+        this.isFulfilled = isFulfilled;
         return this;
     }
 
-    public void setFullFlg(String fullFlg) {
-        this.fullFlg = fullFlg;
+    public void setIsFulfilled(Boolean isFulfilled) {
+        this.isFulfilled = isFulfilled;
     }
 
-    public String getFailedFlg() {
-        return failedFlg;
+    public BigDecimal getAmountTendered() {
+        return amountTendered;
     }
 
-    public Product failedFlg(String failedFlg) {
-        this.failedFlg = failedFlg;
+    public Product amountTendered(BigDecimal amountTendered) {
+        this.amountTendered = amountTendered;
         return this;
     }
 
-    public void setFailedFlg(String failedFlg) {
-        this.failedFlg = failedFlg;
-    }
-
-    public BigDecimal getAmountYes() {
-        return amountYes;
-    }
-
-    public Product amountYes(BigDecimal amountYes) {
-        this.amountYes = amountYes;
-        return this;
-    }
-
-    public void setAmountYes(BigDecimal amountYes) {
-        this.amountYes = amountYes;
+    public void setAmountTendered(BigDecimal amountTendered) {
+        this.amountTendered = amountTendered;
     }
 
     public BigDecimal getAmountWait() {
@@ -1152,32 +1133,6 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         this.parkingFee = parkingFee;
     }
 
-    public Instant getUpdDate() {
-        return updDate;
-    }
-
-    public Product updDate(Instant updDate) {
-        this.updDate = updDate;
-        return this;
-    }
-
-    public void setUpdDate(Instant updDate) {
-        this.updDate = updDate;
-    }
-
-    public String getRateCalculationType() {
-        return rateCalculationType;
-    }
-
-    public Product rateCalculationType(String rateCalculationType) {
-        this.rateCalculationType = rateCalculationType;
-        return this;
-    }
-
-    public void setRateCalculationType(String rateCalculationType) {
-        this.rateCalculationType = rateCalculationType;
-    }
-
     public Instant getFullDate() {
         return fullDate;
     }
@@ -1204,30 +1159,30 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         this.noviceFlg = noviceFlg;
     }
 
-    public String getRateType() {
-        return rateType;
+    public InterestCalculation getInterestCalculation() {
+        return interestCalculation;
     }
 
-    public Product rateType(String rateType) {
-        this.rateType = rateType;
+    public Product interestCalculation(InterestCalculation interestCalculation) {
+        this.interestCalculation = interestCalculation;
         return this;
     }
 
-    public void setRateType(String rateType) {
-        this.rateType = rateType;
+    public void setInterestCalculation(InterestCalculation interestCalculation) {
+        this.interestCalculation = interestCalculation;
     }
 
-    public BigDecimal getRateInputValue() {
-        return rateInputValue;
+    public BigDecimal getInterestCalculationRatio() {
+        return interestCalculationRatio;
     }
 
-    public Product rateInputValue(BigDecimal rateInputValue) {
-        this.rateInputValue = rateInputValue;
+    public Product interestCalculationRatio(BigDecimal interestCalculationRatio) {
+        this.interestCalculationRatio = interestCalculationRatio;
         return this;
     }
 
-    public void setRateInputValue(BigDecimal rateInputValue) {
-        this.rateInputValue = rateInputValue;
+    public void setInterestCalculationRatio(BigDecimal interestCalculationRatio) {
+        this.interestCalculationRatio = interestCalculationRatio;
     }
 
     public Instant getLastReplayDate() {
@@ -1528,10 +1483,9 @@ public class Product extends AbstractAuditingEntity implements Serializable {
             ", repayTimes=" + getRepayTimes() +
             ", manageFee=" + getManageFee() +
             ", manageFeeScale=" + getManageFeeScale() +
-            ", partFlg='" + getPartFlg() + "'" +
-            ", fullFlg='" + getFullFlg() + "'" +
-            ", failedFlg='" + getFailedFlg() + "'" +
-            ", amountYes=" + getAmountYes() +
+            ", isAllowPartial='" + isIsAllowPartial() + "'" +
+            ", isFulfilled='" + isIsFulfilled() + "'" +
+            ", amountTendered=" + getAmountTendered() +
             ", amountWait=" + getAmountWait() +
             ", amountScale=" + getAmountScale() +
             ", minTenderAmount=" + getMinTenderAmount() +
@@ -1558,12 +1512,10 @@ public class Product extends AbstractAuditingEntity implements Serializable {
             ", serviceFeeType='" + getServiceFeeType() + "'" +
             ", serviceFee=" + getServiceFee() +
             ", parkingFee=" + getParkingFee() +
-            ", updDate='" + getUpdDate() + "'" +
-            ", rateCalculationType='" + getRateCalculationType() + "'" +
             ", fullDate='" + getFullDate() + "'" +
             ", noviceFlg='" + getNoviceFlg() + "'" +
-            ", rateType='" + getRateType() + "'" +
-            ", rateInputValue=" + getRateInputValue() +
+            ", interestCalculation='" + getInterestCalculation() + "'" +
+            ", interestCalculationRatio=" + getInterestCalculationRatio() +
             ", lastReplayDate='" + getLastReplayDate() + "'" +
             ", transferCanFlg='" + getTransferCanFlg() + "'" +
             ", transferFrozeTime=" + getTransferFrozeTime() +

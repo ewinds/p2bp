@@ -2,6 +2,7 @@ package io.github.ewinds.web.rest;
 
 import io.github.ewinds.LoanApp;
 
+import io.github.ewinds.client.CustomerServiceClient;
 import io.github.ewinds.config.SecurityBeanOverrideConfiguration;
 
 import io.github.ewinds.domain.Product;
@@ -36,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import io.github.ewinds.domain.enumeration.ProductState;
 import io.github.ewinds.domain.enumeration.InterestCalculationPeriod;
+import io.github.ewinds.domain.enumeration.InterestCalculation;
 /**
  * Test class for the ProductResource REST controller.
  *
@@ -162,17 +164,14 @@ public class ProductResourceIntTest {
     private static final BigDecimal DEFAULT_MANAGE_FEE_SCALE = new BigDecimal(1);
     private static final BigDecimal UPDATED_MANAGE_FEE_SCALE = new BigDecimal(2);
 
-    private static final String DEFAULT_PART_FLG = "AAAAAAAAAA";
-    private static final String UPDATED_PART_FLG = "BBBBBBBBBB";
+    private static final Boolean DEFAULT_IS_ALLOW_PARTIAL = false;
+    private static final Boolean UPDATED_IS_ALLOW_PARTIAL = true;
 
-    private static final String DEFAULT_FULL_FLG = "AAAAAAAAAA";
-    private static final String UPDATED_FULL_FLG = "BBBBBBBBBB";
+    private static final Boolean DEFAULT_IS_FULFILLED = false;
+    private static final Boolean UPDATED_IS_FULFILLED = true;
 
-    private static final String DEFAULT_FAILED_FLG = "AAAAAAAAAA";
-    private static final String UPDATED_FAILED_FLG = "BBBBBBBBBB";
-
-    private static final BigDecimal DEFAULT_AMOUNT_YES = new BigDecimal(1);
-    private static final BigDecimal UPDATED_AMOUNT_YES = new BigDecimal(2);
+    private static final BigDecimal DEFAULT_AMOUNT_TENDERED = new BigDecimal(1);
+    private static final BigDecimal UPDATED_AMOUNT_TENDERED = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_AMOUNT_WAIT = new BigDecimal(1);
     private static final BigDecimal UPDATED_AMOUNT_WAIT = new BigDecimal(2);
@@ -252,23 +251,17 @@ public class ProductResourceIntTest {
     private static final BigDecimal DEFAULT_PARKING_FEE = new BigDecimal(1);
     private static final BigDecimal UPDATED_PARKING_FEE = new BigDecimal(2);
 
-    private static final Instant DEFAULT_UPD_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPD_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_RATE_CALCULATION_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_RATE_CALCULATION_TYPE = "BBBBBBBBBB";
-
     private static final Instant DEFAULT_FULL_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_FULL_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_NOVICE_FLG = "AAAAAAAAAA";
     private static final String UPDATED_NOVICE_FLG = "BBBBBBBBBB";
 
-    private static final String DEFAULT_RATE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_RATE_TYPE = "BBBBBBBBBB";
+    private static final InterestCalculation DEFAULT_INTEREST_CALCULATION = InterestCalculation.MANUAL;
+    private static final InterestCalculation UPDATED_INTEREST_CALCULATION = InterestCalculation.AUTO;
 
-    private static final BigDecimal DEFAULT_RATE_INPUT_VALUE = new BigDecimal(1);
-    private static final BigDecimal UPDATED_RATE_INPUT_VALUE = new BigDecimal(2);
+    private static final BigDecimal DEFAULT_INTEREST_CALCULATION_RATIO = new BigDecimal(1);
+    private static final BigDecimal UPDATED_INTEREST_CALCULATION_RATIO = new BigDecimal(2);
 
     private static final Instant DEFAULT_LAST_REPLAY_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_REPLAY_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -313,6 +306,9 @@ public class ProductResourceIntTest {
     private ProductRepository productRepository;
 
     @Autowired
+    private CustomerServiceClient customerServiceClient;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -331,7 +327,7 @@ public class ProductResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProductResource productResource = new ProductResource(productRepository);
+        final ProductResource productResource = new ProductResource(productRepository, customerServiceClient);
         this.restProductMockMvc = MockMvcBuilders.standaloneSetup(productResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -368,10 +364,6 @@ public class ProductResourceIntTest {
             .auditInfo(DEFAULT_AUDIT_INFO)
             .auditInfoId(DEFAULT_AUDIT_INFO_ID)
             .autoFinancePublishValidTime(DEFAULT_AUTO_FINANCE_PUBLISH_VALID_TIME)
-            .createdBy(DEFAULT_CREATED_BY)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
             .amount(DEFAULT_AMOUNT)
             .interestRate(DEFAULT_INTEREST_RATE)
             .validDay(DEFAULT_VALID_DAY)
@@ -386,10 +378,9 @@ public class ProductResourceIntTest {
             .repayTimes(DEFAULT_REPAY_TIMES)
             .manageFee(DEFAULT_MANAGE_FEE)
             .manageFeeScale(DEFAULT_MANAGE_FEE_SCALE)
-            .partFlg(DEFAULT_PART_FLG)
-            .fullFlg(DEFAULT_FULL_FLG)
-            .failedFlg(DEFAULT_FAILED_FLG)
-            .amountYes(DEFAULT_AMOUNT_YES)
+            .isAllowPartial(DEFAULT_IS_ALLOW_PARTIAL)
+            .isFulfilled(DEFAULT_IS_FULFILLED)
+            .amountTendered(DEFAULT_AMOUNT_TENDERED)
             .amountWait(DEFAULT_AMOUNT_WAIT)
             .amountScale(DEFAULT_AMOUNT_SCALE)
             .minTenderAmount(DEFAULT_MIN_TENDER_AMOUNT)
@@ -416,12 +407,10 @@ public class ProductResourceIntTest {
             .serviceFeeType(DEFAULT_SERVICE_FEE_TYPE)
             .serviceFee(DEFAULT_SERVICE_FEE)
             .parkingFee(DEFAULT_PARKING_FEE)
-            .updDate(DEFAULT_UPD_DATE)
-            .rateCalculationType(DEFAULT_RATE_CALCULATION_TYPE)
             .fullDate(DEFAULT_FULL_DATE)
             .noviceFlg(DEFAULT_NOVICE_FLG)
-            .rateType(DEFAULT_RATE_TYPE)
-            .rateInputValue(DEFAULT_RATE_INPUT_VALUE)
+            .interestCalculation(DEFAULT_INTEREST_CALCULATION)
+            .interestCalculationRatio(DEFAULT_INTEREST_CALCULATION_RATIO)
             .lastReplayDate(DEFAULT_LAST_REPLAY_DATE)
             .transferCanFlg(DEFAULT_TRANSFER_CAN_FLG)
             .transferFrozeTime(DEFAULT_TRANSFER_FROZE_TIME)
@@ -497,10 +486,9 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getRepayTimes()).isEqualTo(DEFAULT_REPAY_TIMES);
         assertThat(testProduct.getManageFee()).isEqualTo(DEFAULT_MANAGE_FEE);
         assertThat(testProduct.getManageFeeScale()).isEqualTo(DEFAULT_MANAGE_FEE_SCALE);
-        assertThat(testProduct.getPartFlg()).isEqualTo(DEFAULT_PART_FLG);
-        assertThat(testProduct.getFullFlg()).isEqualTo(DEFAULT_FULL_FLG);
-        assertThat(testProduct.getFailedFlg()).isEqualTo(DEFAULT_FAILED_FLG);
-        assertThat(testProduct.getAmountYes()).isEqualTo(DEFAULT_AMOUNT_YES);
+        assertThat(testProduct.isIsAllowPartial()).isEqualTo(DEFAULT_IS_ALLOW_PARTIAL);
+        assertThat(testProduct.isIsFulfilled()).isEqualTo(DEFAULT_IS_FULFILLED);
+        assertThat(testProduct.getAmountTendered()).isEqualTo(DEFAULT_AMOUNT_TENDERED);
         assertThat(testProduct.getAmountWait()).isEqualTo(DEFAULT_AMOUNT_WAIT);
         assertThat(testProduct.getAmountScale()).isEqualTo(DEFAULT_AMOUNT_SCALE);
         assertThat(testProduct.getMinTenderAmount()).isEqualTo(DEFAULT_MIN_TENDER_AMOUNT);
@@ -527,12 +515,10 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getServiceFeeType()).isEqualTo(DEFAULT_SERVICE_FEE_TYPE);
         assertThat(testProduct.getServiceFee()).isEqualTo(DEFAULT_SERVICE_FEE);
         assertThat(testProduct.getParkingFee()).isEqualTo(DEFAULT_PARKING_FEE);
-        assertThat(testProduct.getUpdDate()).isEqualTo(DEFAULT_UPD_DATE);
-        assertThat(testProduct.getRateCalculationType()).isEqualTo(DEFAULT_RATE_CALCULATION_TYPE);
         assertThat(testProduct.getFullDate()).isEqualTo(DEFAULT_FULL_DATE);
         assertThat(testProduct.getNoviceFlg()).isEqualTo(DEFAULT_NOVICE_FLG);
-        assertThat(testProduct.getRateType()).isEqualTo(DEFAULT_RATE_TYPE);
-        assertThat(testProduct.getRateInputValue()).isEqualTo(DEFAULT_RATE_INPUT_VALUE);
+        assertThat(testProduct.getInterestCalculation()).isEqualTo(DEFAULT_INTEREST_CALCULATION);
+        assertThat(testProduct.getInterestCalculationRatio()).isEqualTo(DEFAULT_INTEREST_CALCULATION_RATIO);
         assertThat(testProduct.getLastReplayDate()).isEqualTo(DEFAULT_LAST_REPLAY_DATE);
         assertThat(testProduct.getTransferCanFlg()).isEqualTo(DEFAULT_TRANSFER_CAN_FLG);
         assertThat(testProduct.getTransferFrozeTime()).isEqualTo(DEFAULT_TRANSFER_FROZE_TIME);
@@ -617,10 +603,9 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.[*].repayTimes").value(hasItem(DEFAULT_REPAY_TIMES)))
             .andExpect(jsonPath("$.[*].manageFee").value(hasItem(DEFAULT_MANAGE_FEE.intValue())))
             .andExpect(jsonPath("$.[*].manageFeeScale").value(hasItem(DEFAULT_MANAGE_FEE_SCALE.intValue())))
-            .andExpect(jsonPath("$.[*].partFlg").value(hasItem(DEFAULT_PART_FLG.toString())))
-            .andExpect(jsonPath("$.[*].fullFlg").value(hasItem(DEFAULT_FULL_FLG.toString())))
-            .andExpect(jsonPath("$.[*].failedFlg").value(hasItem(DEFAULT_FAILED_FLG.toString())))
-            .andExpect(jsonPath("$.[*].amountYes").value(hasItem(DEFAULT_AMOUNT_YES.intValue())))
+            .andExpect(jsonPath("$.[*].isAllowPartial").value(hasItem(DEFAULT_IS_ALLOW_PARTIAL.booleanValue())))
+            .andExpect(jsonPath("$.[*].isFulfilled").value(hasItem(DEFAULT_IS_FULFILLED.booleanValue())))
+            .andExpect(jsonPath("$.[*].amountTendered").value(hasItem(DEFAULT_AMOUNT_TENDERED.intValue())))
             .andExpect(jsonPath("$.[*].amountWait").value(hasItem(DEFAULT_AMOUNT_WAIT.intValue())))
             .andExpect(jsonPath("$.[*].amountScale").value(hasItem(DEFAULT_AMOUNT_SCALE.intValue())))
             .andExpect(jsonPath("$.[*].minTenderAmount").value(hasItem(DEFAULT_MIN_TENDER_AMOUNT.intValue())))
@@ -647,12 +632,10 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.[*].serviceFeeType").value(hasItem(DEFAULT_SERVICE_FEE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].serviceFee").value(hasItem(DEFAULT_SERVICE_FEE.intValue())))
             .andExpect(jsonPath("$.[*].parkingFee").value(hasItem(DEFAULT_PARKING_FEE.intValue())))
-            .andExpect(jsonPath("$.[*].updDate").value(hasItem(DEFAULT_UPD_DATE.toString())))
-            .andExpect(jsonPath("$.[*].rateCalculationType").value(hasItem(DEFAULT_RATE_CALCULATION_TYPE.toString())))
             .andExpect(jsonPath("$.[*].fullDate").value(hasItem(DEFAULT_FULL_DATE.toString())))
             .andExpect(jsonPath("$.[*].noviceFlg").value(hasItem(DEFAULT_NOVICE_FLG.toString())))
-            .andExpect(jsonPath("$.[*].rateType").value(hasItem(DEFAULT_RATE_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].rateInputValue").value(hasItem(DEFAULT_RATE_INPUT_VALUE.intValue())))
+            .andExpect(jsonPath("$.[*].interestCalculation").value(hasItem(DEFAULT_INTEREST_CALCULATION.toString())))
+            .andExpect(jsonPath("$.[*].interestCalculationRatio").value(hasItem(DEFAULT_INTEREST_CALCULATION_RATIO.intValue())))
             .andExpect(jsonPath("$.[*].lastReplayDate").value(hasItem(DEFAULT_LAST_REPLAY_DATE.toString())))
             .andExpect(jsonPath("$.[*].transferCanFlg").value(hasItem(DEFAULT_TRANSFER_CAN_FLG.toString())))
             .andExpect(jsonPath("$.[*].transferFrozeTime").value(hasItem(DEFAULT_TRANSFER_FROZE_TIME)))
@@ -718,10 +701,9 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.repayTimes").value(DEFAULT_REPAY_TIMES))
             .andExpect(jsonPath("$.manageFee").value(DEFAULT_MANAGE_FEE.intValue()))
             .andExpect(jsonPath("$.manageFeeScale").value(DEFAULT_MANAGE_FEE_SCALE.intValue()))
-            .andExpect(jsonPath("$.partFlg").value(DEFAULT_PART_FLG.toString()))
-            .andExpect(jsonPath("$.fullFlg").value(DEFAULT_FULL_FLG.toString()))
-            .andExpect(jsonPath("$.failedFlg").value(DEFAULT_FAILED_FLG.toString()))
-            .andExpect(jsonPath("$.amountYes").value(DEFAULT_AMOUNT_YES.intValue()))
+            .andExpect(jsonPath("$.isAllowPartial").value(DEFAULT_IS_ALLOW_PARTIAL.booleanValue()))
+            .andExpect(jsonPath("$.isFulfilled").value(DEFAULT_IS_FULFILLED.booleanValue()))
+            .andExpect(jsonPath("$.amountTendered").value(DEFAULT_AMOUNT_TENDERED.intValue()))
             .andExpect(jsonPath("$.amountWait").value(DEFAULT_AMOUNT_WAIT.intValue()))
             .andExpect(jsonPath("$.amountScale").value(DEFAULT_AMOUNT_SCALE.intValue()))
             .andExpect(jsonPath("$.minTenderAmount").value(DEFAULT_MIN_TENDER_AMOUNT.intValue()))
@@ -748,12 +730,10 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.serviceFeeType").value(DEFAULT_SERVICE_FEE_TYPE.toString()))
             .andExpect(jsonPath("$.serviceFee").value(DEFAULT_SERVICE_FEE.intValue()))
             .andExpect(jsonPath("$.parkingFee").value(DEFAULT_PARKING_FEE.intValue()))
-            .andExpect(jsonPath("$.updDate").value(DEFAULT_UPD_DATE.toString()))
-            .andExpect(jsonPath("$.rateCalculationType").value(DEFAULT_RATE_CALCULATION_TYPE.toString()))
             .andExpect(jsonPath("$.fullDate").value(DEFAULT_FULL_DATE.toString()))
             .andExpect(jsonPath("$.noviceFlg").value(DEFAULT_NOVICE_FLG.toString()))
-            .andExpect(jsonPath("$.rateType").value(DEFAULT_RATE_TYPE.toString()))
-            .andExpect(jsonPath("$.rateInputValue").value(DEFAULT_RATE_INPUT_VALUE.intValue()))
+            .andExpect(jsonPath("$.interestCalculation").value(DEFAULT_INTEREST_CALCULATION.toString()))
+            .andExpect(jsonPath("$.interestCalculationRatio").value(DEFAULT_INTEREST_CALCULATION_RATIO.intValue()))
             .andExpect(jsonPath("$.lastReplayDate").value(DEFAULT_LAST_REPLAY_DATE.toString()))
             .andExpect(jsonPath("$.transferCanFlg").value(DEFAULT_TRANSFER_CAN_FLG.toString()))
             .andExpect(jsonPath("$.transferFrozeTime").value(DEFAULT_TRANSFER_FROZE_TIME))
@@ -810,10 +790,6 @@ public class ProductResourceIntTest {
             .auditInfo(UPDATED_AUDIT_INFO)
             .auditInfoId(UPDATED_AUDIT_INFO_ID)
             .autoFinancePublishValidTime(UPDATED_AUTO_FINANCE_PUBLISH_VALID_TIME)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
             .amount(UPDATED_AMOUNT)
             .interestRate(UPDATED_INTEREST_RATE)
             .validDay(UPDATED_VALID_DAY)
@@ -828,10 +804,9 @@ public class ProductResourceIntTest {
             .repayTimes(UPDATED_REPAY_TIMES)
             .manageFee(UPDATED_MANAGE_FEE)
             .manageFeeScale(UPDATED_MANAGE_FEE_SCALE)
-            .partFlg(UPDATED_PART_FLG)
-            .fullFlg(UPDATED_FULL_FLG)
-            .failedFlg(UPDATED_FAILED_FLG)
-            .amountYes(UPDATED_AMOUNT_YES)
+            .isAllowPartial(UPDATED_IS_ALLOW_PARTIAL)
+            .isFulfilled(UPDATED_IS_FULFILLED)
+            .amountTendered(UPDATED_AMOUNT_TENDERED)
             .amountWait(UPDATED_AMOUNT_WAIT)
             .amountScale(UPDATED_AMOUNT_SCALE)
             .minTenderAmount(UPDATED_MIN_TENDER_AMOUNT)
@@ -858,12 +833,10 @@ public class ProductResourceIntTest {
             .serviceFeeType(UPDATED_SERVICE_FEE_TYPE)
             .serviceFee(UPDATED_SERVICE_FEE)
             .parkingFee(UPDATED_PARKING_FEE)
-            .updDate(UPDATED_UPD_DATE)
-            .rateCalculationType(UPDATED_RATE_CALCULATION_TYPE)
             .fullDate(UPDATED_FULL_DATE)
             .noviceFlg(UPDATED_NOVICE_FLG)
-            .rateType(UPDATED_RATE_TYPE)
-            .rateInputValue(UPDATED_RATE_INPUT_VALUE)
+            .interestCalculation(UPDATED_INTEREST_CALCULATION)
+            .interestCalculationRatio(UPDATED_INTEREST_CALCULATION_RATIO)
             .lastReplayDate(UPDATED_LAST_REPLAY_DATE)
             .transferCanFlg(UPDATED_TRANSFER_CAN_FLG)
             .transferFrozeTime(UPDATED_TRANSFER_FROZE_TIME)
@@ -926,10 +899,9 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getRepayTimes()).isEqualTo(UPDATED_REPAY_TIMES);
         assertThat(testProduct.getManageFee()).isEqualTo(UPDATED_MANAGE_FEE);
         assertThat(testProduct.getManageFeeScale()).isEqualTo(UPDATED_MANAGE_FEE_SCALE);
-        assertThat(testProduct.getPartFlg()).isEqualTo(UPDATED_PART_FLG);
-        assertThat(testProduct.getFullFlg()).isEqualTo(UPDATED_FULL_FLG);
-        assertThat(testProduct.getFailedFlg()).isEqualTo(UPDATED_FAILED_FLG);
-        assertThat(testProduct.getAmountYes()).isEqualTo(UPDATED_AMOUNT_YES);
+        assertThat(testProduct.isIsAllowPartial()).isEqualTo(UPDATED_IS_ALLOW_PARTIAL);
+        assertThat(testProduct.isIsFulfilled()).isEqualTo(UPDATED_IS_FULFILLED);
+        assertThat(testProduct.getAmountTendered()).isEqualTo(UPDATED_AMOUNT_TENDERED);
         assertThat(testProduct.getAmountWait()).isEqualTo(UPDATED_AMOUNT_WAIT);
         assertThat(testProduct.getAmountScale()).isEqualTo(UPDATED_AMOUNT_SCALE);
         assertThat(testProduct.getMinTenderAmount()).isEqualTo(UPDATED_MIN_TENDER_AMOUNT);
@@ -956,12 +928,10 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getServiceFeeType()).isEqualTo(UPDATED_SERVICE_FEE_TYPE);
         assertThat(testProduct.getServiceFee()).isEqualTo(UPDATED_SERVICE_FEE);
         assertThat(testProduct.getParkingFee()).isEqualTo(UPDATED_PARKING_FEE);
-        assertThat(testProduct.getUpdDate()).isEqualTo(UPDATED_UPD_DATE);
-        assertThat(testProduct.getRateCalculationType()).isEqualTo(UPDATED_RATE_CALCULATION_TYPE);
         assertThat(testProduct.getFullDate()).isEqualTo(UPDATED_FULL_DATE);
         assertThat(testProduct.getNoviceFlg()).isEqualTo(UPDATED_NOVICE_FLG);
-        assertThat(testProduct.getRateType()).isEqualTo(UPDATED_RATE_TYPE);
-        assertThat(testProduct.getRateInputValue()).isEqualTo(UPDATED_RATE_INPUT_VALUE);
+        assertThat(testProduct.getInterestCalculation()).isEqualTo(UPDATED_INTEREST_CALCULATION);
+        assertThat(testProduct.getInterestCalculationRatio()).isEqualTo(UPDATED_INTEREST_CALCULATION_RATIO);
         assertThat(testProduct.getLastReplayDate()).isEqualTo(UPDATED_LAST_REPLAY_DATE);
         assertThat(testProduct.getTransferCanFlg()).isEqualTo(UPDATED_TRANSFER_CAN_FLG);
         assertThat(testProduct.getTransferFrozeTime()).isEqualTo(UPDATED_TRANSFER_FROZE_TIME);

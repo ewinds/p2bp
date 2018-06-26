@@ -38,10 +38,9 @@ entity Product {
     repayTimes Integer,
     manageFee BigDecimal,
     manageFeeScale BigDecimal,
-    partFlg String,
-    fullFlg String,
-    failedFlg String,
-    amountYes BigDecimal,
+    isAllowPartial Boolean,
+    isFulfilled Boolean,
+    amountTendered BigDecimal,
     amountWait BigDecimal,
     amountScale BigDecimal,
     minTenderAmount BigDecimal,
@@ -52,6 +51,7 @@ entity Product {
     tenderAwardScale BigDecimal,
     directionalPwd String,
     secondFlg String,
+    dueinAmount BigDecimal,
     dueinAmount BigDecimal,
     investTotalAmount BigDecimal,
     wanderFlg String,
@@ -68,12 +68,10 @@ entity Product {
     serviceFeeType String,
     serviceFee BigDecimal,
     parkingFee BigDecimal,
-    updDate Instant,
-    rateCalculationType String,
     fullDate Instant,
     noviceFlg String,
-    rateType String,
-    rateInputValue BigDecimal,
+    interestCalculation InterestCalculation,
+    interestCalculationRatio BigDecimal,
     lastReplayDate Instant,
     transferCanFlg String,
     transferFrozeTime Integer,
@@ -228,3 +226,7 @@ enum InterestCalculationPeriod {
 }
 
 paginate Product with pager
+
+enum InterestCalculation {
+    MANUAL, AUTO, RATIO
+}
