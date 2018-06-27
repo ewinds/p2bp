@@ -68,7 +68,7 @@
         {
             "fieldName": "state",
             "fieldType": "ProductState",
-            "fieldValues": "PENDING,CHECKED,APPROVED,COMPLETED,REFUSED,CANCELED"
+            "fieldValues": "PENDING,CHECKED,PUBLISHED,APPROVED,COMPLETED,REFUSED,CANCELED,FAILED"
         },
         {
             "fieldName": "litpicFileId",
