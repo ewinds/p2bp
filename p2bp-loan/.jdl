@@ -38,8 +38,8 @@ entity Product {
     repayTimes Integer,
     manageFee BigDecimal,
     manageFeeScale BigDecimal,
-    isAllowPartial Boolean,
-    isFulfilled Boolean,
+    partialAllowed Boolean,
+    fulfilled Boolean,
     amountTendered BigDecimal,
     amountWait BigDecimal,
     amountScale BigDecimal,
@@ -163,7 +163,7 @@ relationship ManyToOne {
 }
 
 enum ProductState {
-    PENDING, CHECKED, APPROVED, COMPLETED, REFUSED, CANCELED
+    PENDING, CHECKED, PUBLISHED, APPROVED, COMPLETED, REFUSED, CANCELED, FAILED
 }
 
 enum ProductCategory {

@@ -135,11 +135,11 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "manage_fee_scale", precision=10, scale=2)
     private BigDecimal manageFeeScale;
 
-    @Column(name = "is_allow_partial")
-    private Boolean isAllowPartial;
+    @Column(name = "partial_allowed")
+    private Boolean partialAllowed = false;
 
-    @Column(name = "is_fulfilled")
-    private Boolean isFulfilled;
+    @Column(name = "fulfilled")
+    private Boolean fulfilled = false;
 
     @Column(name = "amount_tendered", precision=10, scale=2)
     private BigDecimal amountTendered;
@@ -756,30 +756,30 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         this.manageFeeScale = manageFeeScale;
     }
 
-    public Boolean isIsAllowPartial() {
-        return isAllowPartial;
+    public Boolean isPartialAllowed() {
+        return partialAllowed;
     }
 
-    public Product isAllowPartial(Boolean isAllowPartial) {
-        this.isAllowPartial = isAllowPartial;
+    public Product partialAllowed(Boolean partialAllowed) {
+        this.partialAllowed = partialAllowed;
         return this;
     }
 
-    public void setIsAllowPartial(Boolean isAllowPartial) {
-        this.isAllowPartial = isAllowPartial;
+    public void setPartialAllowed(Boolean partialAllowed) {
+        this.partialAllowed = partialAllowed;
     }
 
-    public Boolean isIsFulfilled() {
-        return isFulfilled;
+    public Boolean isFulfilled() {
+        return fulfilled;
     }
 
-    public Product isFulfilled(Boolean isFulfilled) {
-        this.isFulfilled = isFulfilled;
+    public Product fulfilled(Boolean fulfilled) {
+        this.fulfilled = fulfilled;
         return this;
     }
 
-    public void setIsFulfilled(Boolean isFulfilled) {
-        this.isFulfilled = isFulfilled;
+    public void setFulfilled(Boolean fulfilled) {
+        this.fulfilled = fulfilled;
     }
 
     public BigDecimal getAmountTendered() {
@@ -1465,10 +1465,6 @@ public class Product extends AbstractAuditingEntity implements Serializable {
             ", auditInfo=" + getAuditInfo() +
             ", auditInfoId=" + getAuditInfoId() +
             ", autoFinancePublishValidTime=" + getAutoFinancePublishValidTime() +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
             ", amount=" + getAmount() +
             ", interestRate=" + getInterestRate() +
             ", validDay=" + getValidDay() +
@@ -1483,8 +1479,8 @@ public class Product extends AbstractAuditingEntity implements Serializable {
             ", repayTimes=" + getRepayTimes() +
             ", manageFee=" + getManageFee() +
             ", manageFeeScale=" + getManageFeeScale() +
-            ", isAllowPartial='" + isIsAllowPartial() + "'" +
-            ", isFulfilled='" + isIsFulfilled() + "'" +
+            ", partialAllowed='" + isPartialAllowed() + "'" +
+            ", fulfilled='" + isFulfilled() + "'" +
             ", amountTendered=" + getAmountTendered() +
             ", amountWait=" + getAmountWait() +
             ", amountScale=" + getAmountScale() +

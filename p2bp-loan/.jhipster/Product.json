@@ -196,11 +196,11 @@
             "fieldType": "BigDecimal"
         },
         {
-            "fieldName": "isAllowPartial",
+            "fieldName": "partialAllowed",
             "fieldType": "Boolean"
         },
         {
-            "fieldName": "isFulfilled",
+            "fieldName": "fulfilled",
             "fieldType": "Boolean"
         },
         {

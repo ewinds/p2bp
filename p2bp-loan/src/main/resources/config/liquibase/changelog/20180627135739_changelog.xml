@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="jhipster (generated)" id="1530079067015-1">
+        <addColumn tableName="product">
+            <column name="fulfilled" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530079067015-2">
+        <addColumn tableName="product">
+            <column name="partial_allowed" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530079067015-3">
+        <dropColumn columnName="IS_ALLOW_PARTIAL" tableName="PRODUCT"/>
+    </changeSet>
+    <changeSet author="jhipster (generated)" id="1530079067015-4">
+        <dropColumn columnName="IS_FULFILLED" tableName="PRODUCT"/>
+    </changeSet>
+</databaseChangeLog>

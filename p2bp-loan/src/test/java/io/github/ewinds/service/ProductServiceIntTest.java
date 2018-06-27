@@ -6,7 +6,6 @@ import io.github.ewinds.domain.enumeration.InterestCalculation;
 import io.github.ewinds.domain.enumeration.InterestCalculationPeriod;
 import io.github.ewinds.domain.enumeration.ProductState;
 import io.github.ewinds.repository.ProductRepository;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +37,7 @@ public class ProductServiceIntTest {
     public void init() {
         product = new Product();
         product.setTitle("AAAAA");
-        product.setState(ProductState.APPROVED);
+        product.setState(ProductState.PUBLISHED);
         product.setAmount(BigDecimal.valueOf(50000));
         product.setInterestCalculation(InterestCalculation.AUTO);
         product.setInterestRate(BigDecimal.valueOf(12));
@@ -50,10 +49,13 @@ public class ProductServiceIntTest {
     @Test
     @Transactional
     public void testFailExpiredProduct() {
+        product.setStartDate(Instant.now());
+        productRepository.saveAndFlush(product);
+        assertThat(productRepository.findOne(product.getId()).getState()).isEqualByComparingTo(ProductState.PUBLISHED);
+        productService.failExpiredProduct();
+        assertThat(productRepository.findOne(product.getId()).getState()).isEqualByComparingTo(ProductState.PUBLISHED);
         product.setEndDate(Instant.now().minus(30, ChronoUnit.DAYS));
         productRepository.saveAndFlush(product);
-
-        assertThat(productRepository.findOne(product.getId()).getState()).isEqualByComparingTo(ProductState.APPROVED);
         productService.failExpiredProduct();
         assertThat(productRepository.findOne(product.getId()).getState()).isEqualByComparingTo(ProductState.FAILED);
     }

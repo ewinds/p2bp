@@ -378,8 +378,8 @@ public class ProductResourceIntTest {
             .repayTimes(DEFAULT_REPAY_TIMES)
             .manageFee(DEFAULT_MANAGE_FEE)
             .manageFeeScale(DEFAULT_MANAGE_FEE_SCALE)
-            .isAllowPartial(DEFAULT_IS_ALLOW_PARTIAL)
-            .isFulfilled(DEFAULT_IS_FULFILLED)
+            .partialAllowed(DEFAULT_IS_ALLOW_PARTIAL)
+            .fulfilled(DEFAULT_IS_FULFILLED)
             .amountTendered(DEFAULT_AMOUNT_TENDERED)
             .amountWait(DEFAULT_AMOUNT_WAIT)
             .amountScale(DEFAULT_AMOUNT_SCALE)
@@ -486,8 +486,8 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getRepayTimes()).isEqualTo(DEFAULT_REPAY_TIMES);
         assertThat(testProduct.getManageFee()).isEqualTo(DEFAULT_MANAGE_FEE);
         assertThat(testProduct.getManageFeeScale()).isEqualTo(DEFAULT_MANAGE_FEE_SCALE);
-        assertThat(testProduct.isIsAllowPartial()).isEqualTo(DEFAULT_IS_ALLOW_PARTIAL);
-        assertThat(testProduct.isIsFulfilled()).isEqualTo(DEFAULT_IS_FULFILLED);
+        assertThat(testProduct.isPartialAllowed()).isEqualTo(DEFAULT_IS_ALLOW_PARTIAL);
+        assertThat(testProduct.isFulfilled()).isEqualTo(DEFAULT_IS_FULFILLED);
         assertThat(testProduct.getAmountTendered()).isEqualTo(DEFAULT_AMOUNT_TENDERED);
         assertThat(testProduct.getAmountWait()).isEqualTo(DEFAULT_AMOUNT_WAIT);
         assertThat(testProduct.getAmountScale()).isEqualTo(DEFAULT_AMOUNT_SCALE);
@@ -804,8 +804,8 @@ public class ProductResourceIntTest {
             .repayTimes(UPDATED_REPAY_TIMES)
             .manageFee(UPDATED_MANAGE_FEE)
             .manageFeeScale(UPDATED_MANAGE_FEE_SCALE)
-            .isAllowPartial(UPDATED_IS_ALLOW_PARTIAL)
-            .isFulfilled(UPDATED_IS_FULFILLED)
+            .partialAllowed(UPDATED_IS_ALLOW_PARTIAL)
+            .fulfilled(UPDATED_IS_FULFILLED)
             .amountTendered(UPDATED_AMOUNT_TENDERED)
             .amountWait(UPDATED_AMOUNT_WAIT)
             .amountScale(UPDATED_AMOUNT_SCALE)
@@ -899,8 +899,8 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getRepayTimes()).isEqualTo(UPDATED_REPAY_TIMES);
         assertThat(testProduct.getManageFee()).isEqualTo(UPDATED_MANAGE_FEE);
         assertThat(testProduct.getManageFeeScale()).isEqualTo(UPDATED_MANAGE_FEE_SCALE);
-        assertThat(testProduct.isIsAllowPartial()).isEqualTo(UPDATED_IS_ALLOW_PARTIAL);
-        assertThat(testProduct.isIsFulfilled()).isEqualTo(UPDATED_IS_FULFILLED);
+        assertThat(testProduct.isPartialAllowed()).isEqualTo(UPDATED_IS_ALLOW_PARTIAL);
+        assertThat(testProduct.isFulfilled()).isEqualTo(UPDATED_IS_FULFILLED);
         assertThat(testProduct.getAmountTendered()).isEqualTo(UPDATED_AMOUNT_TENDERED);
         assertThat(testProduct.getAmountWait()).isEqualTo(UPDATED_AMOUNT_WAIT);
         assertThat(testProduct.getAmountScale()).isEqualTo(UPDATED_AMOUNT_SCALE);
