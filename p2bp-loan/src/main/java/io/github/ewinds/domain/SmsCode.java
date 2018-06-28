@@ -1,7 +1,12 @@
 package io.github.ewinds.domain;
 
 
+import io.github.ewinds.config.Constants;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -20,7 +25,10 @@ public class SmsCode extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "phone")
+    @NotNull
+    @Pattern(regexp = Constants.PHONE_REGEX)
+    @Size(min = 11, max = 11)
+    @Column(name = "phone", unique = true, nullable = false)
     private String phone;
 
     @Column(name = "code")

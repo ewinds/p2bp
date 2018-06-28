@@ -35,7 +35,7 @@
     "entityTableName": "sms_code",
     "dto": "no",
     "pagination": "no",
-    "service": "no",
+    "service": "serviceClass",
     "jpaMetamodelFiltering": false,
     "microserviceName": "loan"
 }

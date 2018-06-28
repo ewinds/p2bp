@@ -14,6 +14,8 @@ import java.util.List;
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
 
+    private String name = "p2bp";
+
     private final List<KeyValue> serviceFees = new ArrayList<>();
 
     private final List<KeyValue> interestCalculations = new ArrayList<>();
@@ -41,6 +43,14 @@ public class ApplicationProperties {
         public void setValue(String value) {
             this.value = value;
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<KeyValue> getServiceFees() {

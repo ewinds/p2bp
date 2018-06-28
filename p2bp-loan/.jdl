@@ -240,3 +240,5 @@ entity SmsCode {
     lastModifiedBy String,
     lastModifiedDate Instant
 }
+
+service SmsCode with serviceClass

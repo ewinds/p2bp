@@ -2,20 +2,18 @@ package io.github.ewinds.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import io.github.ewinds.domain.SmsCode;
-
-import io.github.ewinds.repository.SmsCodeRepository;
+import io.github.ewinds.service.SmsCodeService;
 import io.github.ewinds.web.rest.errors.BadRequestAlertException;
 import io.github.ewinds.web.rest.util.HeaderUtil;
-import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -29,10 +27,10 @@ public class SmsCodeResource {
 
     private static final String ENTITY_NAME = "smsCode";
 
-    private final SmsCodeRepository smsCodeRepository;
+    private final SmsCodeService smsCodeService;
 
-    public SmsCodeResource(SmsCodeRepository smsCodeRepository) {
-        this.smsCodeRepository = smsCodeRepository;
+    public SmsCodeResource(SmsCodeService smsCodeService) {
+        this.smsCodeService = smsCodeService;
     }
 
     /**
@@ -44,15 +42,15 @@ public class SmsCodeResource {
      */
     @PostMapping("/sms-codes")
     @Timed
-    public ResponseEntity<SmsCode> createSmsCode(@RequestBody SmsCode smsCode) throws URISyntaxException {
+    public ResponseEntity<Void> createSmsCode(@RequestBody SmsCode smsCode) throws URISyntaxException {
         log.debug("REST request to save SmsCode : {}", smsCode);
         if (smsCode.getId() != null) {
             throw new BadRequestAlertException("A new smsCode cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        SmsCode result = smsCodeRepository.save(smsCode);
+        SmsCode result = smsCodeService.save(smsCode);
         return ResponseEntity.created(new URI("/api/sms-codes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+            .build();
     }
 
     /**
@@ -64,56 +62,23 @@ public class SmsCodeResource {
      * or with status 500 (Internal Server Error) if the smsCode couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/sms-codes")
+    @PostMapping("/sms-codes:verify")
     @Timed
-    public ResponseEntity<SmsCode> updateSmsCode(@RequestBody SmsCode smsCode) throws URISyntaxException {
+    public ResponseEntity<Void> updateSmsCode(@RequestBody SmsCode smsCode) throws URISyntaxException {
         log.debug("REST request to update SmsCode : {}", smsCode);
-        if (smsCode.getId() == null) {
-            return createSmsCode(smsCode);
+
+        if (smsCode.getCode() == null) {
+            throw new BadRequestAlertException("Verify smsCode must have code", ENTITY_NAME, "required");
         }
-        SmsCode result = smsCodeRepository.save(smsCode);
+
+        Optional<SmsCode> result = smsCodeService.findValidOne(smsCode.getPhone(), smsCode.getCode());
+
+        if (!result.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, smsCode.getId().toString()))
-            .body(result);
-    }
-
-    /**
-     * GET  /sms-codes : get all the smsCodes.
-     *
-     * @return the ResponseEntity with status 200 (OK) and the list of smsCodes in body
-     */
-    @GetMapping("/sms-codes")
-    @Timed
-    public List<SmsCode> getAllSmsCodes() {
-        log.debug("REST request to get all SmsCodes");
-        return smsCodeRepository.findAll();
-        }
-
-    /**
-     * GET  /sms-codes/:id : get the "id" smsCode.
-     *
-     * @param id the id of the smsCode to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the smsCode, or with status 404 (Not Found)
-     */
-    @GetMapping("/sms-codes/{id}")
-    @Timed
-    public ResponseEntity<SmsCode> getSmsCode(@PathVariable Long id) {
-        log.debug("REST request to get SmsCode : {}", id);
-        SmsCode smsCode = smsCodeRepository.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(smsCode));
-    }
-
-    /**
-     * DELETE  /sms-codes/:id : delete the "id" smsCode.
-     *
-     * @param id the id of the smsCode to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
-    @DeleteMapping("/sms-codes/{id}")
-    @Timed
-    public ResponseEntity<Void> deleteSmsCode(@PathVariable Long id) {
-        log.debug("REST request to delete SmsCode : {}", id);
-        smsCodeRepository.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+            .headers(HeaderUtil.createAlert("Verify smsCode ok", smsCode.getPhone()))
+            .build();
     }
 }
