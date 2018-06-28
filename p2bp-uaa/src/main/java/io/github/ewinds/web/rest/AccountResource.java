@@ -62,6 +62,8 @@ public class AccountResource {
     public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
+        } else if (!checkSmsCodeLength(managedUserVM.getSmsCode())) {
+            throw new InvalidSmsCodeException();
         }
         userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
@@ -190,5 +192,10 @@ public class AccountResource {
         return !StringUtils.isEmpty(password) &&
             password.length() >= ManagedUserVM.PASSWORD_MIN_LENGTH &&
             password.length() <= ManagedUserVM.PASSWORD_MAX_LENGTH;
+    }
+
+    private static boolean checkSmsCodeLength(String smsCode) {
+        return !StringUtils.isEmpty(smsCode) &&
+            smsCode.length() == ManagedUserVM.SMS_CODE_LENGTH;
     }
 }
