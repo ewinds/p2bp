@@ -1,9 +1,11 @@
 package io.github.ewinds.repository;
 
+import io.github.ewinds.domain.User;
 import io.github.ewinds.domain.UserExtra;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
+import java.util.Optional;
 
 
 /**
@@ -12,5 +14,5 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface UserExtraRepository extends JpaRepository<UserExtra, Long> {
-
+    Optional<User> findOneByPhone(String phone);
 }

@@ -53,6 +53,8 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    @NotBlank
+    @Pattern(regexp = Constants.PHONE_REGEX)
     private String phone;
 
     private String nickname;

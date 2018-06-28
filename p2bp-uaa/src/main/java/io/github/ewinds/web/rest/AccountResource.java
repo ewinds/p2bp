@@ -3,6 +3,7 @@ package io.github.ewinds.web.rest;
 import com.codahale.metrics.annotation.Timed;
 
 import io.github.ewinds.domain.User;
+import io.github.ewinds.repository.UserExtraRepository;
 import io.github.ewinds.repository.UserRepository;
 import io.github.ewinds.security.SecurityUtils;
 import io.github.ewinds.service.MailService;
@@ -33,13 +34,16 @@ public class AccountResource {
 
     private final UserRepository userRepository;
 
+    private final UserExtraRepository userExtraRepository;
+
     private final UserService userService;
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserRepository userRepository, UserExtraRepository userExtraRepository, UserService userService, MailService mailService) {
 
         this.userRepository = userRepository;
+        this.userExtraRepository = userExtraRepository;
         this.userService = userService;
         this.mailService = mailService;
     }
@@ -61,6 +65,7 @@ public class AccountResource {
         }
         userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
+        userExtraRepository.findOneByPhone(managedUserVM.getPhone()).ifPresent(u -> {throw new PhoneAlreadyUsedException();});
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
     }

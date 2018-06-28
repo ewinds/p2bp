@@ -1,10 +1,12 @@
 package io.github.ewinds.web.rest;
 
 import io.github.ewinds.UaaApp;
+import io.github.ewinds.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -24,11 +26,14 @@ public class CustomerResourceIntTest {
 
     private MockMvc restMockMvc;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        CustomerResource customerResource = new CustomerResource();
+        CustomerResource customerResource = new CustomerResource(userRepository);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(customerResource)
             .build();

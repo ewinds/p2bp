@@ -1,6 +1,7 @@
 package io.github.ewinds.service;
 
 import io.github.ewinds.config.ApplicationProperties;
+import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -8,9 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
-import java.util.Arrays;
 import java.util.Locale;
-import java.util.stream.Stream;
 
 /**
  * Service for sending sms.
@@ -57,7 +56,7 @@ public class SmsService {
 //        context.setVariable(USER, user);
 //        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
 //        String content = templateEngine.process(templateName, context);
-        String content = messageSource.getMessage(titleKey, Stream.concat(Arrays.stream(new String[]{applicationProperties.getName()}), Arrays.stream(params)).toArray(), locale);
+        String content = messageSource.getMessage(titleKey, ArrayUtils.addAll(new String[]{applicationProperties.getName()}, params), locale);
         sendSms(to, content);
     }
 

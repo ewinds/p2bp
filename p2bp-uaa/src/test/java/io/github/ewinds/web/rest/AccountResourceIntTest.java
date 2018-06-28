@@ -5,6 +5,7 @@ import io.github.ewinds.UaaApp;
 import io.github.ewinds.domain.Authority;
 import io.github.ewinds.domain.User;
 import io.github.ewinds.repository.AuthorityRepository;
+import io.github.ewinds.repository.UserExtraRepository;
 import io.github.ewinds.repository.UserRepository;
 import io.github.ewinds.security.AuthoritiesConstants;
 import io.github.ewinds.service.MailService;
@@ -56,6 +57,9 @@ public class AccountResourceIntTest {
     private UserRepository userRepository;
 
     @Autowired
+    private UserExtraRepository userExtraRepository;
+
+    @Autowired
     private AuthorityRepository authorityRepository;
 
     @Autowired
@@ -85,10 +89,10 @@ public class AccountResourceIntTest {
         MockitoAnnotations.initMocks(this);
         doNothing().when(mockMailService).sendActivationEmail(anyObject());
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userExtraRepository, userService, mockMailService);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, userExtraRepository, mockUserService, mockMailService);
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)
             .setControllerAdvice(exceptionTranslator)
@@ -170,6 +174,28 @@ public class AccountResourceIntTest {
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        validUser.setPhone("13555555555");
+        assertThat(userRepository.findOneByLogin("joe").isPresent()).isFalse();
+
+        restMvc.perform(
+            post("/api/register")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(validUser)))
+            .andExpect(status().isCreated());
+
+        assertThat(userRepository.findOneByLogin("joe").isPresent()).isTrue();
+    }
+
+    @Test
+    @Transactional
+    public void testRegisterSimple() throws Exception {
+        ManagedUserVM validUser = new ManagedUserVM();
+        validUser.setLogin("joe");
+        validUser.setPassword("password");
+        validUser.setActivated(true);
+        validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+        validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        validUser.setPhone("13555555555");
         assertThat(userRepository.findOneByLogin("joe").isPresent()).isFalse();
 
         restMvc.perform(
@@ -194,6 +220,7 @@ public class AccountResourceIntTest {
         invalidUser.setImageUrl("http://placehold.it/50x50");
         invalidUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         invalidUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        invalidUser.setPhone("13555555555");
 
         restUserMockMvc.perform(
             post("/api/register")
@@ -231,6 +258,31 @@ public class AccountResourceIntTest {
 
     @Test
     @Transactional
+    public void testRegisterInvalidPhone() throws Exception {
+        ManagedUserVM invalidUser = new ManagedUserVM();
+        invalidUser.setLogin("bob");
+        invalidUser.setPassword("password");
+        invalidUser.setFirstName("Bob");
+        invalidUser.setLastName("Green");
+        invalidUser.setEmail("invalid");
+        invalidUser.setActivated(true);
+        invalidUser.setImageUrl("http://placehold.it/50x50");
+        invalidUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+        invalidUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        invalidUser.setPhone("22222222222");// <-- invalid
+
+        restUserMockMvc.perform(
+            post("/api/register")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(invalidUser)))
+            .andExpect(status().isBadRequest());
+
+        Optional<User> user = userRepository.findOneByLogin("bob");
+        assertThat(user.isPresent()).isFalse();
+    }
+
+    @Test
+    @Transactional
     public void testRegisterInvalidPassword() throws Exception {
         ManagedUserVM invalidUser = new ManagedUserVM();
         invalidUser.setLogin("bob");
@@ -242,6 +294,7 @@ public class AccountResourceIntTest {
         invalidUser.setImageUrl("http://placehold.it/50x50");
         invalidUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         invalidUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        invalidUser.setPhone("13555555555");
 
         restUserMockMvc.perform(
             post("/api/register")
@@ -266,6 +319,7 @@ public class AccountResourceIntTest {
         invalidUser.setImageUrl("http://placehold.it/50x50");
         invalidUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         invalidUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        invalidUser.setPhone("13555555555");
 
         restUserMockMvc.perform(
             post("/api/register")
@@ -291,6 +345,7 @@ public class AccountResourceIntTest {
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        validUser.setPhone("13555555555");
 
         // Duplicate login, different email
         ManagedUserVM duplicatedUser = new ManagedUserVM();
@@ -307,6 +362,7 @@ public class AccountResourceIntTest {
         duplicatedUser.setLastModifiedBy(validUser.getLastModifiedBy());
         duplicatedUser.setLastModifiedDate(validUser.getLastModifiedDate());
         duplicatedUser.setAuthorities(new HashSet<>(validUser.getAuthorities()));
+        duplicatedUser.setPhone("13555555555");
 
         // Good user
         restMvc.perform(
@@ -340,6 +396,7 @@ public class AccountResourceIntTest {
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        validUser.setPhone("13555555555");
 
         // Duplicate email, different login
         ManagedUserVM duplicatedUser = new ManagedUserVM();
@@ -356,6 +413,7 @@ public class AccountResourceIntTest {
         duplicatedUser.setLastModifiedBy(validUser.getLastModifiedBy());
         duplicatedUser.setLastModifiedDate(validUser.getLastModifiedDate());
         duplicatedUser.setAuthorities(new HashSet<>(validUser.getAuthorities()));
+        duplicatedUser.setPhone("13555555555");
 
         // Good user
         restMvc.perform(
@@ -411,6 +469,7 @@ public class AccountResourceIntTest {
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        validUser.setPhone("13555555555");
 
         restMvc.perform(
             post("/api/register")
