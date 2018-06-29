@@ -53,6 +53,7 @@ public class AccountResource {
      *
      * @param managedUserVM the managed user View Model
      * @throws InvalidPasswordException 400 (Bad Request) if the password is incorrect
+     * @throws InvalidSmsCodeException 400 (Bad Request) if the sms code is incorrect
      * @throws EmailAlreadyUsedException 400 (Bad Request) if the email is already used
      * @throws LoginAlreadyUsedException 400 (Bad Request) if the login is already used
      */
