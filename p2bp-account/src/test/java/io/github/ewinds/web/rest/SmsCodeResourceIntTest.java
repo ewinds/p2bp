@@ -173,7 +173,7 @@ public class SmsCodeResourceIntTest {
     @Transactional
     public void verifySmsCodeExpired() throws Exception {
         // Initialize the database
-        smsCode.code("123456").expiredDate(Instant.now().minus(5, ChronoUnit.MINUTES));
+        smsCode.code("123456").expiredDate(Instant.now().minus(1, ChronoUnit.MINUTES));
         smsCode = smsCodeRepository.save(smsCode);
 
         int databaseSizeBeforeUpdate = smsCodeRepository.findAll().size();
@@ -190,7 +190,7 @@ public class SmsCodeResourceIntTest {
         List<SmsCode> smsCodeList = smsCodeRepository.findAll();
         assertThat(smsCodeList).hasSize(databaseSizeBeforeUpdate);
 
-        smsCode.expiredDate(Instant.now().minus(4, ChronoUnit.MINUTES));
+        smsCode.expiredDate(Instant.now().plus(1, ChronoUnit.MINUTES));
         smsCodeRepository.save(smsCode);
 
         restSmsCodeMockMvc.perform(post("/api/sms-codes:verify")

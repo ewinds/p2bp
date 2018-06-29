@@ -56,7 +56,7 @@ public class SmsCodeService {
     @Transactional(readOnly = true)
     public Optional<SmsCode> findValidOne(String phone, String code) {
         log.debug("Request to get SmsCode : {}", phone);
-        return smsCodeRepository.findOneByPhoneAndCodeAndExpiredDateAfter(phone, code, Instant.now().minus(5, ChronoUnit.MINUTES));
+        return smsCodeRepository.findOneByPhoneAndCodeAndExpiredDateAfter(phone, code, Instant.now());
     }
 
     /**
