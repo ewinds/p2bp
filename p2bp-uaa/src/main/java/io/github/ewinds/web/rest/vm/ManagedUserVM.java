@@ -12,13 +12,8 @@ public class ManagedUserVM extends UserDTO {
 
     public static final int PASSWORD_MAX_LENGTH = 100;
 
-    public static final int SMS_CODE_LENGTH = 6;
-
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
-
-    @Size(min = SMS_CODE_LENGTH, max = SMS_CODE_LENGTH)
-    private String smsCode;
 
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
@@ -30,14 +25,6 @@ public class ManagedUserVM extends UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSmsCode() {
-        return smsCode;
-    }
-
-    public void setSmsCode(String smsCode) {
-        this.smsCode = smsCode;
     }
 
     @Override

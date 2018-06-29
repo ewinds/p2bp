@@ -190,13 +190,13 @@ public class AccountResourceIntTest {
     @Transactional
     public void testRegisterSimple() throws Exception {
         ManagedUserVM validUser = new ManagedUserVM();
-        validUser.setLogin("13555555555");
+        validUser.setLogin("joe");
         validUser.setPassword("password");
         validUser.setActivated(true);
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
         validUser.setPhone("13555555555");
-        assertThat(userRepository.findOneByLogin("13555555555").isPresent()).isFalse();
+        assertThat(userRepository.findOneByLogin("joe").isPresent()).isFalse();
 
         restMvc.perform(
             post("/api/register")
@@ -204,7 +204,7 @@ public class AccountResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(validUser)))
             .andExpect(status().isCreated());
 
-        assertThat(userRepository.findOneByLogin("13555555555").isPresent()).isTrue();
+        assertThat(userRepository.findOneByLogin("joe").isPresent()).isTrue();
     }
 
     @Test
@@ -531,7 +531,6 @@ public class AccountResourceIntTest {
         userDTO.setImageUrl("http://placehold.it/50x50");
         userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMIN));
-        userDTO.setPhone("13555555555");
 
         restMvc.perform(
             post("/api/account")
@@ -642,7 +641,6 @@ public class AccountResourceIntTest {
         userDTO.setImageUrl("http://placehold.it/50x50");
         userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMIN));
-        userDTO.setPhone("13555555555");
 
         restMvc.perform(
             post("/api/account")
