@@ -54,7 +54,7 @@ public class SmsCodeResource {
     }
 
     /**
-     * PUT  /sms-codes : Updates an existing smsCode.
+     * POST  /sms-codes:verify : Verify an existing smsCode.
      *
      * @param smsCode the smsCode to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated smsCode,
@@ -64,8 +64,8 @@ public class SmsCodeResource {
      */
     @PostMapping("/sms-codes:verify")
     @Timed
-    public ResponseEntity<Void> updateSmsCode(@RequestBody SmsCode smsCode) throws URISyntaxException {
-        log.debug("REST request to update SmsCode : {}", smsCode);
+    public ResponseEntity<Void> verifySmsCode(@RequestBody SmsCode smsCode) throws URISyntaxException {
+        log.debug("REST request to verify SmsCode : {}", smsCode);
 
         if (smsCode.getCode() == null) {
             throw new BadRequestAlertException("Verify smsCode must have code", ENTITY_NAME, "required");
