@@ -230,15 +230,3 @@ paginate Product with pager
 enum InterestCalculation {
     MANUAL, AUTO, RATIO
 }
-
-entity SmsCode {
-    phone String,
-    code String,
-    expiredDate Instant,
-    createdBy String,
-    createdDate Instant,
-    lastModifiedBy String,
-    lastModifiedDate Instant
-}
-
-service SmsCode with serviceClass
