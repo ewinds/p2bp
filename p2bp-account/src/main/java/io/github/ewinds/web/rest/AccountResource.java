@@ -1,16 +1,17 @@
 package io.github.ewinds.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.netflix.hystrix.exception.HystrixBadRequestException;
 import io.github.ewinds.client.UserServiceClient;
 import io.github.ewinds.domain.SmsCode;
 import io.github.ewinds.security.dto.UserDTO;
 import io.github.ewinds.service.SmsCodeService;
+import io.github.ewinds.web.rest.errors.BadRequestAlertException;
 import io.github.ewinds.web.rest.errors.InvalidSmsCodeException;
 import io.github.ewinds.web.rest.vm.PhoneRegisterVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,7 +41,7 @@ public class AccountResource {
     @PostMapping("/register")
     @Timed
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> register(@Valid @RequestBody PhoneRegisterVM phoneRegisterVM) {
+    public void register(@Valid @RequestBody PhoneRegisterVM phoneRegisterVM) {
         Optional<SmsCode> result = smsCodeService.findValidOne(phoneRegisterVM.getPhone(), phoneRegisterVM.getSmsCode());
 
         if (!result.isPresent()) {
@@ -51,6 +52,11 @@ public class AccountResource {
         userDTO.setLogin(phoneRegisterVM.getPhone());
         userDTO.setPhone(phoneRegisterVM.getPhone());
         userDTO.setPassword(phoneRegisterVM.getPassword());
-        return userServiceClient.register(userDTO);
+
+        try {
+            userServiceClient.register(userDTO);
+        } catch (HystrixBadRequestException e) {
+            throw new BadRequestAlertException(e.getMessage(), "account", "badregister");
+        }
     }
 }
