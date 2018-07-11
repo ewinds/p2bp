@@ -1,6 +1,6 @@
 package io.github.ewinds.client;
 
-import io.github.ewinds.security.dto.UserDTO;
+import io.github.ewinds.service.dto.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

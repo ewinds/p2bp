@@ -1,4 +1,4 @@
-package io.github.ewinds.security.dto;
+package io.github.ewinds.service.dto;
 
 import io.github.ewinds.config.Constants;
 import org.hibernate.validator.constraints.NotBlank;

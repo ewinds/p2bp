@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 import io.github.ewinds.client.UserServiceClient;
 import io.github.ewinds.domain.SmsCode;
-import io.github.ewinds.security.dto.UserDTO;
+import io.github.ewinds.service.dto.UserDTO;
 import io.github.ewinds.service.SmsCodeService;
 import io.github.ewinds.web.rest.errors.BadRequestAlertException;
 import io.github.ewinds.web.rest.errors.InvalidSmsCodeException;
