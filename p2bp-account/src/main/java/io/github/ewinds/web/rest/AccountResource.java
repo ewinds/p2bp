@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 import io.github.ewinds.client.UserServiceClient;
 import io.github.ewinds.domain.SmsCode;
+import io.github.ewinds.messaging.ProducerChannel;
+import io.github.ewinds.messaging.RegisteredUser;
 import io.github.ewinds.service.dto.UserDTO;
 import io.github.ewinds.service.SmsCodeService;
 import io.github.ewinds.web.rest.errors.BadRequestAlertException;
@@ -12,6 +14,8 @@ import io.github.ewinds.web.rest.vm.PhoneRegisterVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,9 +34,12 @@ public class AccountResource {
 
     private final UserServiceClient userServiceClient;
 
-    public AccountResource(SmsCodeService smsCodeService, UserServiceClient userServiceClient) {
+    private MessageChannel channel;
+
+    public AccountResource(SmsCodeService smsCodeService, UserServiceClient userServiceClient, ProducerChannel channel) {
         this.smsCodeService = smsCodeService;
         this.userServiceClient = userServiceClient;
+        this.channel = channel.userChannel();
     }
 
     /**
@@ -55,6 +62,7 @@ public class AccountResource {
 
         try {
             userServiceClient.register(userDTO);
+            channel.send(MessageBuilder.withPayload(new RegisteredUser(phoneRegisterVM.getPhone(), phoneRegisterVM.getPhone())).build());
         } catch (HystrixBadRequestException e) {
             throw new BadRequestAlertException(e.getMessage(), "account", "badregister");
         }

@@ -84,6 +84,12 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+    cloud:
+        stream:
+            bindings:
+                userChannel:
+                    destination: user
+                    content-type: application/json
 security:
     basic:
         enabled: false

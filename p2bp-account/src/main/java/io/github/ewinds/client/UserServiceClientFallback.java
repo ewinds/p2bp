@@ -1,6 +1,6 @@
 package io.github.ewinds.client;
 
-import io.github.ewinds.security.dto.UserDTO;
+import io.github.ewinds.service.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
