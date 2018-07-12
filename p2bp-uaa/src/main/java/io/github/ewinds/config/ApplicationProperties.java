@@ -10,5 +10,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
+    private UaaProperties.WebClientConfiguration webClientConfiguration = new UaaProperties.WebClientConfiguration();
 
+    public UaaProperties.WebClientConfiguration getWebClientConfiguration() {
+        return webClientConfiguration;
+    }
 }

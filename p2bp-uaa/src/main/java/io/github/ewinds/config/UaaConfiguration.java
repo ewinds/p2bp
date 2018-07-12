@@ -106,9 +106,12 @@ public class UaaConfiguration extends AuthorizationServerConfigurerAdapter imple
 
     private final UaaProperties uaaProperties;
 
-    public UaaConfiguration(JHipsterProperties jHipsterProperties, UaaProperties uaaProperties) {
+    private final ApplicationProperties applicationProperties;
+
+    public UaaConfiguration(JHipsterProperties jHipsterProperties, UaaProperties uaaProperties, ApplicationProperties applicationProperties) {
         this.jHipsterProperties = jHipsterProperties;
         this.uaaProperties = uaaProperties;
+        this.applicationProperties = applicationProperties;
     }
 
     @Override
@@ -135,7 +138,15 @@ public class UaaConfiguration extends AuthorizationServerConfigurerAdapter imple
             .autoApprove(true)
             .authorizedGrantTypes("client_credentials")
             .accessTokenValiditySeconds((int) jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds())
-            .refreshTokenValiditySeconds((int) jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSecondsForRememberMe());
+            .refreshTokenValiditySeconds((int) jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSecondsForRememberMe())
+            .and()
+            .withClient(applicationProperties.getWebClientConfiguration().getClientId())
+            .secret(applicationProperties.getWebClientConfiguration().getSecret())
+            .scopes("rest-client")
+            .autoApprove(true)
+            .authorizedGrantTypes("client_credentials")
+            .accessTokenValiditySeconds(applicationProperties.getWebClientConfiguration().getAccessTokenValidityInSeconds())
+            .refreshTokenValiditySeconds(applicationProperties.getWebClientConfiguration().getRefreshTokenValidityInSecondsForRememberMe());
     }
 
     @Override
