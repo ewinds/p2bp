@@ -90,6 +90,8 @@ spring:
                 userChannel:
                     destination: user
                     content-type: application/json
+                subscribableChannel:
+                    destination: user
 security:
     basic:
         enabled: false
