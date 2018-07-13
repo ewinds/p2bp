@@ -214,6 +214,7 @@ dependencies {
         exclude group: 'com.vaadin.external.google', module: 'android-json'
     }
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+    compile "org.springframework.security.oauth:spring-security-oauth2"
 }
 
 task cleanResources(type: Delete) {

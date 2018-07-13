@@ -18,6 +18,7 @@ logging:
         ROOT: DEBUG
         io.github.ewinds: DEBUG
         io.github.jhipster: DEBUG
+#        org.springframework.security: DEBUG
 
 eureka:
     instance:

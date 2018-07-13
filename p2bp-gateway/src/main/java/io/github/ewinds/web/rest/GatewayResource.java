@@ -52,4 +52,10 @@ public class GatewayResource {
         });
         return new ResponseEntity<>(routeVMs, HttpStatus.OK);
     }
+
+    @GetMapping("/ping")
+    @Timed
+    public String ping() {
+        return "pong";
+    }
 }

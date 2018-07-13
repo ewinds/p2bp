@@ -1,6 +1,5 @@
 package io.github.ewinds;
 
-import io.github.ewinds.config.ApplicationProperties;
 import io.github.ewinds.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;
@@ -23,7 +22,7 @@ import java.util.Collection;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
-@EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
+@EnableConfigurationProperties({LiquibaseProperties.class})
 public class ExternalApp {
 
     private static final Logger log = LoggerFactory.getLogger(ExternalApp.class);

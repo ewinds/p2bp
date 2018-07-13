@@ -18,6 +18,7 @@ logging:
         ROOT: DEBUG
         io.github.ewinds: DEBUG
         io.github.jhipster: DEBUG
+#        org.springframework.security: DEBUG
 
 spring:
     profiles:
@@ -142,3 +143,7 @@ jhipster:
 # ===================================================================
 
 application:
+    oauth2:
+        clientId: external
+        clientSecret: external
+        accesTokenUri: http://localhost:8080/uaa/oauth/token
