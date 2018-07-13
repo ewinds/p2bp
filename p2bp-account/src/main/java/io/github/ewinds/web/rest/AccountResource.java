@@ -10,6 +10,7 @@ import io.github.ewinds.service.dto.UserDTO;
 import io.github.ewinds.service.SmsCodeService;
 import io.github.ewinds.web.rest.errors.BadRequestAlertException;
 import io.github.ewinds.web.rest.errors.InvalidSmsCodeException;
+import io.github.ewinds.web.rest.vm.PhoneLoginVM;
 import io.github.ewinds.web.rest.vm.PhoneRegisterVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,5 +67,15 @@ public class AccountResource {
         } catch (HystrixBadRequestException e) {
             throw new BadRequestAlertException(e.getMessage(), "account", "badregister");
         }
+    }
+
+    /**
+     * POST /login : login the user.
+     */
+    @PostMapping("/login:phone")
+    @Timed
+    @ResponseStatus(HttpStatus.CREATED)
+    public void loginByPhone(@Valid @RequestBody PhoneLoginVM phoneLoginVM) {
+
     }
 }
